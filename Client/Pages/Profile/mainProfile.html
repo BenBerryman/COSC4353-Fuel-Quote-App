@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>F&Umacr;LR</title>
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">-->
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../Components/styling.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+
+    <div class="title page-title">Your Profile</div>
+    <div class="section">
+        <img src="https://www.w3schools.com/w3images/avatar2.png" alt="" class="profilePic">
+        <span class="profileName">John Doe</span>
+    </div>
+    <div class="section">
+        <div class="section-title">Address 1</div>
+        <div>4855 Apple Avenue</div>
+        <div>Silicon Valley, CA 12345-6789</div>
+
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="homepage.js"></script>
+<script>
+    $(function(){
+        $('#header').load('../../Components/header.html');
+    });
+</script>
+
+</body>
+</html>
