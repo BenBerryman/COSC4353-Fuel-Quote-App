@@ -39,11 +39,27 @@ body, .title {
 
 .section-title {
     font-size: 15pt;
+    margin-bottom: 10px;
 }
 
 .page-title {
     margin: 20px 0;
-    font-size: 20pt;
+    font-size: 25pt;
+}
+
+.section {
+    padding: 0;
+}
+.section:not(:last-of-type) {
+    margin-bottom: 10px;
+}
+
+.section > :not(.section-title) {
+    margin-bottom: 4px;
+}
+.section .editable {
+    margin-bottom: 2px;
+    padding-bottom: 2px;
 }
 
 a {
@@ -72,8 +88,9 @@ a:hover {
 .navbar {
     display: flex;
     align-items: center;
-    width: 300px;
+    max-width: 665px;
     justify-content: space-between;
+    flex-grow: 1;
 }
 .vertical-navbar {
     display: flex;
@@ -88,9 +105,14 @@ a:hover {
     margin-bottom: 0 !important;
 }
 .container {
-    width: 1000px;
+    width: 800px;
     margin: auto;
 }
+.container.small, .section.small {
+    width: 500px;
+    margin: auto;
+}
+
 .spacer {
     margin: 0 10px;
 }
@@ -105,6 +127,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    white-space: nowrap;
 }
 
 #header .title.link {
@@ -136,9 +159,108 @@ a:hover {
     font-size: 20pt;
 }
 
-.section {
-    padding: 0;
+.indent {
+    margin-left: 135px;
 }
-.section:not(:last-of-type) {
-    margin-bottom: 10px;
+.indent-small {
+    margin-left: 50px;
 }
+
+[contenteditable="true"]:focus {
+    border-bottom: white 2px solid;
+}
+.data-field, .edit-field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-field > span {
+    width: 75px;
+}
+.edit-field > div {
+    width: 200px;
+}
+.data-field > div {
+    width: 306px;
+    padding: 3px;
+}
+
+.edit-field div:first-of-type {
+    border-bottom: transparent 2px solid;
+    padding: 3px;
+}
+
+.edit-field [contenteditable="true"],
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus{
+    border-bottom: none;
+    outline:none;
+    background: #423c3c;
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    border: none;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+.number-increment-field {
+    border: 2px solid #ddd;
+    display: inline-flex;
+}
+
+.number-input-field,
+.number-input-field * {
+    box-sizing: border-box;
+}
+
+.number-input-field button {
+    outline:none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+}
+
+.number-input-field button:before,
+.number-input-field button:after {
+    display: inline-block;
+    position: absolute;
+    content: '';
+    width: 1rem;
+    height: 2px;
+    background-color: #212121;
+    transform: translate(-50%, -50%);
+}
+.number-input-field button.plus:after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input-field input[type=number] {
+    font-family: sans-serif;
+    max-width: 5rem;
+    padding: .5rem;
+    border: solid #ddd;
+    border-width: 0 2px;
+    font-size: 2rem;
+    height: 3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.loggedInAs {
+    position: absolute;
+    font-size: 10pt;
+    top: 21%;
+}
+

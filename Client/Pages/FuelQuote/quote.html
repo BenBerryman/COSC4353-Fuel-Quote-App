@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>F&Umacr;LR</title>
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">-->
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../Components/styling.css">
+    <script src="https://kit.fontawesome.com/44362617d9.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+    <form action="">
+        <div class="title page-title">Get a Quote</div>
+        <div class="section">
+            <img src="https://www.w3schools.com/w3images/avatar2.png" alt="" class="profilePic">
+            <span class="loggedInAs">Logged in as:</span>
+            <span class="profileName">Jannett Doe</span>
+        </div>
+        <div class="section small">
+            <div class="section-title edit-field">Delivery Address
+                <button onclick="edit(this.parentElement);preventDefault();">Edit</button></div>
+            <div class="data-field indent-small">
+                <span>Street:</span>
+                <div class="street">4855 Apple Avenue</div>
+
+            </div>
+            <div class="data-field indent-small">
+                <span>City:</span>
+                <div class="city">Silicon Valley</div>
+            </div>
+            <div class="data-field indent-small">
+                <span>State:</span>
+                <div class="state">CA</div>
+            </div>
+            <div class="data-field indent-small">
+                <span>ZIP Code:</span>
+                <div class="zip">12345-6789</div>
+            </div>
+
+        </div>
+        <div class="section small">
+            <div class="section-title">Fuel Amount</div>
+            <div class="indent-small">
+                <span>Amount:</span>
+                <div class="number-increment-field">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); preventDefault()" ></button>
+                    <input type="number">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); preventDefault()" class="plus"></button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="mainProfile.js"></script>
+<script>
+    $(function(){
+        $('#header').load('../../Components/header.html');
+    });
+</script>
+
+</body>
+</html>
