@@ -18,3 +18,18 @@ function finalize(section) {
 
     check.outerHTML = button;
 }
+$("#quoteHistory").hide();
+
+$("#profileInfoShow").click(function() {
+    $(this)[0].classList.remove("inactive");
+    $("#quoteHistoryShow")[0].classList.add("inactive");
+    $("#profileInfo").show();
+    $("#quoteHistory").hide();
+
+})
+$("#quoteHistoryShow").click(function() {
+    $(this)[0].classList.remove("inactive");
+    $("#profileInfoShow")[0].classList.add("inactive");
+    $("#profileInfo").hide();
+    $("#quoteHistory").show();
+})

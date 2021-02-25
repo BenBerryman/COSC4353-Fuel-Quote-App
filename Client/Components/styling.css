@@ -1,3 +1,4 @@
+/* Overarching, big items */
 html {
     background-color: #1F1E25;
     color: white;
@@ -10,6 +11,19 @@ body {
 }
 .homepage {
     margin: 0;
+}
+
+.container {
+    width: 800px;
+    margin: auto;
+}
+.container.small, .section.small {
+    width: 500px;
+    margin: auto;
+}
+
+.spacer {
+    margin: 0 10px;
 }
 
 @font-face {
@@ -36,6 +50,73 @@ sup {
     font-size: 13pt;
 }
 
+a {
+    color: inherit;
+    transition: color 0.15s linear;
+    text-decoration: none;
+}
+a:hover {
+    color: #9b9b9b;
+}
+
+.indent {
+    margin-left: 135px;
+}
+.indent-small {
+    margin-left: 50px;
+}
+
+/* Page Titles, Page Selectors, Headers */
+
+.page-title {
+    margin: 20px 0;
+    font-size: 25pt;
+}
+.page-title.inactive {
+    color: #4f4f4f;
+}
+button.page-title {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 0;
+}
+button.page-title:hover {
+    color: white;
+    background-color: transparent;
+}
+
+.page-selector {
+    display: flex;
+}
+.page-selector .title.page-title:not(:first-child) {
+    margin-left: 25px;
+}
+
+#header {
+    height: 40px;
+    width: 1250px;
+    margin: auto;
+    padding: 10px 0;
+    background-color: inherit;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+}
+
+#header .title.link {
+    position: relative;
+}
+
+/* Sections */
+
+.section {
+    padding: 15px;
+    position: relative;
+}
+
 .section-title {
     font-size: 15pt;
     margin: 0 0 13px 0;
@@ -48,16 +129,6 @@ sup {
 }
 .section-content > * {
     margin: 3px 0;
-}
-
-.page-title {
-    margin: 20px 0;
-    font-size: 25pt;
-}
-
-.section {
-    padding: 15px;
-    position: relative;
 }
 
 .section .editable {
@@ -76,19 +147,12 @@ sup {
     align-items: center;
 }
 
-a {
-    color: inherit;
-    transition: color 0.15s linear;
-    text-decoration: none;
-}
-a:hover {
-    color: #9b9b9b;
-}
-
 .vertical-spacer {
     width: 100%;
     height: 50px;
 }
+
+/* Front Page */
 
 .cover {
     display: flex;
@@ -123,35 +187,6 @@ a:hover {
     font-size: 70pt;
     margin-bottom: 0 !important;
 }
-.container {
-    width: 800px;
-    margin: auto;
-}
-.container.small, .section.small {
-    width: 500px;
-    margin: auto;
-}
-
-.spacer {
-    margin: 0 10px;
-}
-
-#header {
-    height: 40px;
-    width: 1250px;
-    margin: auto;
-    padding: 10px 0;
-    background-color: inherit;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    white-space: nowrap;
-}
-
-#header .title.link {
-    position: relative;
-}
 
 #slideshow {
     position: relative;
@@ -166,6 +201,8 @@ a:hover {
     position: absolute;
 }
 
+/* Profile Page, Data Fields, and Editable Fields */
+
 .profilePic {
     vertical-align: middle;
     width: 100px;
@@ -176,13 +213,6 @@ a:hover {
 
 .profileName {
     font-size: 20pt;
-}
-
-.indent {
-    margin-left: 135px;
-}
-.indent-small {
-    margin-left: 50px;
 }
 
 [contenteditable="true"]:focus {
@@ -235,7 +265,7 @@ a:hover {
 }
 .data-field.edit > .text-input {
     width: 200px;
-    padding: 3px;
+    padding: 6px;
 }
 
 .data-field.edit div {
@@ -305,11 +335,12 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom-right-radius: 3px;
 }
 button {
-    transition: background-color 0.15s linear;
+    transition: background-color 0.15s linear,
+                color 0.15s linear;
     cursor: pointer;
 }
-button:hover {
-    background-color: #6a6a6a  !important;
+.edit button:hover {
+    background-color: #6a6a6a;
 }
 
 .number-incrementer input[type=number] {
@@ -379,9 +410,20 @@ input#date {
     border: none !important;
     background: none !important;
 }
+.ui-icon-circle-triangle-w {
+    background-position: -109px -19px;
+    background-size: 295px;
+}
+.ui-icon-circle-triangle-e {
+    background-position: -42px -19px;
+    background-size: 295px;
+}
 .ui-datepicker td span, .ui-datepicker td a {
     padding: 0;
     width: 25px;
+}
+.ui-datepicker th {
+    font-family: "Neue Montreal";
 }
 .ui-datepicker a:hover {
     border: none;
@@ -408,5 +450,8 @@ input#date {
     margin-bottom: 10px;
     border-bottom: #6a6a6a 1px solid;
 }
+
+/* Tables */
+
 
 

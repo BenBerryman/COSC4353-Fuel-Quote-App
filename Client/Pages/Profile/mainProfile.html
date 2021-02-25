@@ -14,64 +14,159 @@
 <div id="header"></div>
 
 <div class="container">
+    <div class="page-selector">
+        <button id="profileInfoShow" class="title page-title">Your Profile</button>
+        <button id="quoteHistoryShow" class="title page-title inactive">Quote History</button>
+    </div>
 
-    <div class="title page-title">Your Profile</div>
     <div class="section">
         <img src="https://www.w3schools.com/w3images/avatar2.png" alt="" class="profilePic">
         <span class="profileName">John Doe</span>
     </div>
-    <div class="section small">
-        <div class="section-title">Address 1</div>
-        <div class="section-content indent-small">
-            <div class="data-field edit">
-                <span>Street:</span>
-                <div class="text-input street">4855 Apple Avenue</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
-            </div>
-            <div class="data-field edit">
-                <span>City:</span>
-                <div class="text-input city">Silicon Valley</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
-            </div>
-            <div class="data-field edit">
-                <span>State:</span>
-                <div class="text-input state">CA</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
-            </div>
-            <div class="data-field edit">
-                <span>ZIP Code:</span>
-                <div class="text-input zip">12345-6789</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
-            </div>
-        </div>
-
-
-    </div>
-    <div class="section small">
-        <div class="section-title">Address 2</div>
-        <div class="section-content indent-small">
-            <div class="data-field edit">
-                <span>Street:</span>
-                <div class="text-input street">4855 Apple Avenue</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
-            </div>
-            <div class="data-field edit">
-                <span>City:</span>
-                <div class="text-input city">Silicon Valley</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
-            </div>
-            <div class="data-field edit">
-                <span>State:</span>
-                <div class="text-input state">CA</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
-            </div>
-            <div class="data-field edit">
-                <span>ZIP Code:</span>
-                <div class="text-input zip">12345-6789</div>
-                <button onclick="edit(this.parentElement)">Edit</button>
+    <div id="profileInfo">
+        <div class="section small">
+            <div class="section-title">Address 1</div>
+            <div class="section-content indent-small">
+                <div class="data-field edit">
+                    <span>Street:</span>
+                    <div class="text-input street">4855 Apple Avenue</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
+                <div class="data-field edit">
+                    <span>City:</span>
+                    <div class="text-input city">Silicon Valley</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
+                <div class="data-field edit">
+                    <span>State:</span>
+                    <div class="text-input state">CA</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
+                <div class="data-field edit">
+                    <span>ZIP Code:</span>
+                    <div class="text-input zip">12345-6789</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
             </div>
         </div>
+        <div class="section small">
+            <div class="section-title">Address 2</div>
+            <div class="section-content indent-small">
+                <div class="data-field edit">
+                    <span>Street:</span>
+                    <div class="text-input street">4855 Apple Avenue</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
+                <div class="data-field edit">
+                    <span>City:</span>
+                    <div class="text-input city">Silicon Valley</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
+                <div class="data-field edit">
+                    <span>State:</span>
+                    <div class="text-input state">CA</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
+                <div class="data-field edit">
+                    <span>ZIP Code:</span>
+                    <div class="text-input zip">12345-6789</div>
+                    <button onclick="edit(this.parentElement)">Edit</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div id="quoteHistory">
+        <div class="section">
+            <table class="table" id="quotes">
+                <!-- Gallons Requested (numeric, required)
+                - Delivery Address (Non-editable, comes from client profile)
+                - Delivery Date (Calender, date picker)
+                - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not
+                building pricing module yet)
+                - Total Amount Due (numeric non-editable, calculated (gallons * price)) -->
+                <tr>
+                    <th>Full name</th>
+                    <th>Address 1</th>
+                    <th>Address 2</th>
+                    <th>State</th>
+                    <th>Zip code</th>
+
+                    <th>Delivery Date</th>
+                    <th>Gallons Requested</th>
+                    <th>Price / Gallon</th>
+
+                    <th>Total Amount Due</th>
+                </tr>
+                <tr>
+                    <td>James Dean</td>
+                    <td>XXX Street</td>
+                    <td>Apartment/Unit</td>
+                    <td>ND</td>
+                    <td>12345-6789</td>
+
+                    <td>2020-05-01</td>
+                    <td>20</td>
+                    <td>10</td>
+                    <td>200</td>
+
+                </tr>
+                <tr>
+                    <td>James Dean</td>
+                    <td>XXX Street</td>
+                    <td>Apartment/Unit</td>
+                    <td>ND</td>
+                    <td>12345-6789</td>
+
+                    <td>2020-05-01</td>
+                    <td>20</td>
+                    <td>10</td>
+                    <td>200</td>
+
+                </tr>
+                <tr>
+                    <td>James Dean</td>
+                    <td>XXX Street</td>
+                    <td>Apartment/Unit</td>
+                    <td>ND</td>
+                    <td>12345-6789</td>
+
+                    <td>2020-05-01</td>
+                    <td>20</td>
+                    <td>10</td>
+                    <td>200</td>
+
+                </tr>
+                <tr>
+                    <td>James Dean</td>
+                    <td>XXX Street</td>
+                    <td>Apartment/Unit</td>
+                    <td>ND</td>
+                    <td>12345-6789</td>
+
+                    <td>2020-05-01</td>
+                    <td>20</td>
+                    <td>10</td>
+                    <td>200</td>
+
+                </tr>
+                <tr>
+                    <td>James Dean</td>
+                    <td>XXX Street</td>
+                    <td>Apartment/Unit</td>
+                    <td>ND</td>
+                    <td>12345-6789</td>
+
+                    <td>2020-05-01</td>
+                    <td>20</td>
+                    <td>10</td>
+                    <td>200</td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+
 
 
 </div>
@@ -82,6 +177,7 @@
 <script>
     $(function(){
         $('#header').load('../../Components/header.html');
+
     });
 </script>
 
