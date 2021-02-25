@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>F&Umacr;LR</title>
+    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">-->
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../../Components/styling.css">
+    <script src="https://kit.fontawesome.com/44362617d9.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+           <div class="title page-title">Quote history</div>
+
+<div class="section">
+    <table class="table" id="quotes">
+        <!-- Gallons Requested (numeric, required)
+        - Delivery Address (Non-editable, comes from client profile)
+        - Delivery Date (Calender, date picker)
+        - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not
+        building pricing module yet)
+        - Total Amount Due (numeric non-editable, calculated (gallons * price)) -->
+        <tr>
+            <th>Full name</th>
+            <th>Address 1</th>
+            <th>Address 2</th>
+            <th>State</th>
+            <th>Zip code</th>
+
+            <th>Delivery Date</th>
+            <th>Gallons Requested</th>
+            <th>Price / Gallon</th>
+
+            <th>Total Amount Due</th>
+        </tr>
+        <tr>
+            <td>James Dean</td>
+            <td>XXX Street</td>
+            <td>Apartment/Unit</td>
+            <td>ND</td>
+            <td>12345-6789</td>
+
+            <td>2020-05-01</td>
+            <td>20</td>
+            <td>10</td>
+            <td>200</td>
+
+        </tr>
+        <tr>
+            <td>James Dean</td>
+            <td>XXX Street</td>
+            <td>Apartment/Unit</td>
+            <td>ND</td>
+            <td>12345-6789</td>
+        
+            <td>2020-05-01</td>
+            <td>20</td>
+            <td>10</td>
+            <td>200</td>
+        
+        </tr>
+        <tr>
+            <td>James Dean</td>
+            <td>XXX Street</td>
+            <td>Apartment/Unit</td>
+            <td>ND</td>
+            <td>12345-6789</td>
+        
+            <td>2020-05-01</td>
+            <td>20</td>
+            <td>10</td>
+            <td>200</td>
+        
+        </tr>
+        <tr>
+            <td>James Dean</td>
+            <td>XXX Street</td>
+            <td>Apartment/Unit</td>
+            <td>ND</td>
+            <td>12345-6789</td>
+        
+            <td>2020-05-01</td>
+            <td>20</td>
+            <td>10</td>
+            <td>200</td>
+        
+        </tr>
+        <tr>
+            <td>James Dean</td>
+            <td>XXX Street</td>
+            <td>Apartment/Unit</td>
+            <td>ND</td>
+            <td>12345-6789</td>
+        
+            <td>2020-05-01</td>
+            <td>20</td>
+            <td>10</td>
+            <td>200</td>
+        
+        </tr>
+    </table>
+</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="mainProfile.js"></script>
+<script>
+    $(function(){
+        $('#header').load('../../Components/header.html');
+    });
+</script>
+
+</body>
+</html>
