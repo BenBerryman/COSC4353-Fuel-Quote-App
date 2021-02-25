@@ -16,44 +16,85 @@
 <div class="container">
     <form action="">
         <div class="title page-title">Get a Quote</div>
-        <div class="section">
+        <div class="section profile">
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="" class="profilePic">
             <span class="loggedInAs">Logged in as:</span>
             <span class="profileName">Jannett Doe</span>
         </div>
         <div class="section small">
-            <div class="section-title edit-field">Delivery Address
-                <button onclick="edit(this.parentElement);preventDefault();">Edit</button></div>
-            <div class="data-field indent-small">
-                <span>Street:</span>
-                <div class="street">4855 Apple Avenue</div>
+            <div class="section-title edit">Delivery Address
+                <button onclick="edit(this.parentElement);preventDefault();">Edit</button>
+            </div>
+            <div class="section-content indent-small">
+                <div class="data-field">
+                    <span>Street:</span>
+                    <div class="text-input street">4855 Apple Avenue</div>
+                </div>
+                <div class="data-field">
+                    <span>City:</span>
+                    <div class="text-input city">Silicon Valley</div>
+                </div>
+                <div class="data-field">
+                    <span>State:</span>
+                    <div class="text-input state">CA</div>
+                </div>
+                <div class="data-field">
+                    <span>ZIP Code:</span>
+                    <div class="text-input zip">12345-6789</div>
+                </div>
+            </div>
+        </div>
 
+        <div class="section small">
+            <div class="section-title">Order Details</div>
+            <div class="section-content indent-small">
+                <div class="data-field">
+                    <span>Fuel Amount:</span>
+                    <div class="number-incrementer with-post-text">
+                        <button class="increment-down">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" min="0">
+                        <button class="increment-up">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <span class="post-text">gallons</span>
+                    </div>
+                </div>
+
+                <div class="data-field">
+                    <span>Delivery Date:</span>
+                    <div class="datepicker">
+                        <i class="far fa-calendar-alt" style="font-size: 14pt; color: #6a6a6a; margin-right: 5px;"></i>
+                        <input class="noFocus" id="date" type="text" required
+                               oninvalid="this.setCustomValidity('This field is required.')" onchange="this.setCustomValidity('')">
+                        <input id="alt-date" type="hidden">
+                    </div>
+
+                </div>
             </div>
-            <div class="data-field indent-small">
-                <span>City:</span>
-                <div class="city">Silicon Valley</div>
+        </div>
+        <div class="vertical-spacer"></div>
+
+        <div class="section bold">
+            <div class="pricing-field">
+                <span>Price Per Gallon</span>
+                <div id="pricePerGallon"><sup>$ </sup>4.50</div>
             </div>
-            <div class="data-field indent-small">
-                <span>State:</span>
-                <div class="state">CA</div>
-            </div>
-            <div class="data-field indent-small">
-                <span>ZIP Code:</span>
-                <div class="zip">12345-6789</div>
+
+            <div class="pricing-field">
+                <span>Total Amount Due</span>
+                <div id="totalAmtDue"><sup>$ </sup>50.00</div>
             </div>
 
         </div>
-        <div class="section small">
-            <div class="section-title">Fuel Amount</div>
-            <div class="indent-small">
-                <span>Amount:</span>
-                <div class="number-increment-field">
-                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); preventDefault()" ></button>
-                    <input type="number">
-                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); preventDefault()" class="plus"></button>
-                </div>
 
+        <div class="nextPage">
+            <!-- <div> Some legal info can go here if need be </div> -->
+            <div class="nextPageButtonHolder">
+                <button type="submit">Purchase</button>
             </div>
+
         </div>
     </form>
 
@@ -63,10 +104,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="mainProfile.js"></script>
+<script src="quote.js"></script>
 <script>
     $(function(){
         $('#header').load('../../Components/header.html');
+        $( "#date" ).datepicker();
     });
 </script>
 

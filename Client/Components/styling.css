@@ -11,10 +11,6 @@ body {
 .homepage {
     margin: 0;
 }
-body, .title {
-    color: inherit;
-    background-color: inherit;
-}
 
 @font-face {
     font-family: 'Neue Montreal';
@@ -36,10 +32,22 @@ body, .title {
     font-weight: bold;
     margin-bottom: 0;
 }
+sup {
+    font-size: 13pt;
+}
 
 .section-title {
     font-size: 15pt;
-    margin-bottom: 10px;
+    margin: 0 0 13px 0;
+}
+
+.section-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.section-content > * {
+    margin: 3px 0;
 }
 
 .page-title {
@@ -48,18 +56,24 @@ body, .title {
 }
 
 .section {
-    padding: 0;
-}
-.section:not(:last-of-type) {
-    margin-bottom: 10px;
+    padding: 15px;
+    position: relative;
 }
 
-.section > :not(.section-title) {
-    margin-bottom: 4px;
-}
 .section .editable {
     margin-bottom: 2px;
     padding-bottom: 2px;
+}
+
+.section.bold {
+    background-color: #423c3c;
+    border-radius: 8px;
+}
+
+.section.profile {
+    margin: 0;
+    display: flex;
+    align-items: center;
 }
 
 a {
@@ -71,6 +85,10 @@ a:hover {
     color: #9b9b9b;
 }
 
+.vertical-spacer {
+    width: 100%;
+    height: 50px;
+}
 
 .cover {
     display: flex;
@@ -84,6 +102,7 @@ a:hover {
     margin: auto;
     justify-content: space-evenly;
     align-items: center;
+    border: #dedede2b 3px solid;
 }
 .navbar {
     display: flex;
@@ -169,28 +188,69 @@ a:hover {
 [contenteditable="true"]:focus {
     border-bottom: white 2px solid;
 }
-.data-field, .edit-field {
+.data-field, .edit {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    align-items: center;
 }
 
-.edit-field > span {
-    width: 75px;
+.edit button:last-of-type {
+    margin-left: auto;
+    font-family: "Avenir Next LT Pro";
+    background-color: transparent;
+    border: #6a6a6a 1px solid;
+    border-radius: 3px;
+    color: white;
+    padding: 6px 10px;
 }
-.edit-field > div {
-    width: 200px;
+
+.nextPage {
+    margin: 20px 0;
+
 }
-.data-field > div {
+
+.nextPage button:last-of-type {
+    margin-top: 20px;
+    font-family: "Neue Montreal";
+    background-color: #8390d5;
+    border: none;
+    border-radius: 8px;
+    font-size: 16pt;
+    padding: 8px 16px;
+    color: white;
+}
+
+.nextPageButtonHolder {
+    display: flex;
+    justify-content: end;
+}
+
+.data-field > span {
+    width: 150px;
+}
+
+.data-field > .text-input {
     width: 306px;
     padding: 3px;
 }
+.data-field.edit > .text-input {
+    width: 200px;
+    padding: 3px;
+}
 
-.edit-field div:first-of-type {
+.data-field.edit div {
     border-bottom: transparent 2px solid;
     padding: 3px;
 }
 
-.edit-field [contenteditable="true"],
+.number-incrementer.with-post-text {
+    align-items: center;
+}
+.number-incrementer > .post-text {
+    padding: 8px;
+}
+
+.data-field.edit [contenteditable="true"],
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus{
     border-bottom: none;
@@ -204,63 +264,149 @@ input[type="number"] {
     appearance: textfield;
     border: none;
 }
+
+input {
+    outline: none;
+}
+
+
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
-.number-increment-field {
-    border: 2px solid #ddd;
+.number-incrementer {
     display: inline-flex;
 }
 
-.number-input-field,
-.number-input-field * {
+.number-incrementer,
+.number-incrementer * {
     box-sizing: border-box;
 }
 
-.number-input-field button {
+.number-incrementer button {
     outline:none;
     -webkit-appearance: none;
     background-color: transparent;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    cursor: pointer;
+    border: #6a6a6a 1px solid;
+    width: 2rem;
+    height: 2rem;
     margin: 0;
     position: relative;
+    color: inherit;
 }
 
-.number-input-field button:before,
-.number-input-field button:after {
-    display: inline-block;
-    position: absolute;
-    content: '';
-    width: 1rem;
-    height: 2px;
-    background-color: #212121;
-    transform: translate(-50%, -50%);
+.number-incrementer .increment-down {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
-.number-input-field button.plus:after {
-    transform: translate(-50%, -50%) rotate(90deg);
+.number-incrementer .increment-up {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+button {
+    transition: background-color 0.15s linear;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #6a6a6a  !important;
 }
 
-.number-input-field input[type=number] {
+.number-incrementer input[type=number] {
     font-family: sans-serif;
     max-width: 5rem;
     padding: .5rem;
-    border: solid #ddd;
-    border-width: 0 2px;
-    font-size: 2rem;
-    height: 3rem;
+    border-top: #6a6a6a 1px solid;
+    border-bottom: #6a6a6a 1px solid;
+    background: transparent;
+    font-size: 15pt;
+    height: 2rem;
     font-weight: bold;
     text-align: center;
+    color: inherit;
 }
 
 .loggedInAs {
     position: absolute;
     font-size: 10pt;
-    top: 21%;
+    top: 28px;
+    left: 17.8%;
 }
+
+/* Datepicker */
+
+input#date {
+    border: #6a6a6a 1px solid;
+    background: transparent;
+    color: white;
+    border-radius: 3px;
+    padding: 6px;
+    width: 105px;
+    font-size: 12pt;
+    text-align: center;
+    font-family: "Avenir Next LT Pro";
+}
+
+.ui-widget {
+    font-family: "Avenir Next LT Pro";
+    font-weight: bold;
+}
+.ui-datepicker th {
+    padding: 0 .5rem;
+}
+.ui-datepicker {
+    width: 15em;
+    height: 203px;
+    padding: 0;
+    border: none;
+    border-radius: 7px;
+    color: #1F1E25;
+}
+.ui-widget-header {
+    font-family: "Neue Montreal";
+    border-bottom: #1F1E25 2px solid;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 0;
+    margin-bottom: 5px;
+    background: none;
+}
+.ui-widget-header .ui-state-hover {
+    background: none;
+}
+.ui-state-default {
+    border: none !important;
+    background: none !important;
+}
+.ui-datepicker td span, .ui-datepicker td a {
+    padding: 0;
+    width: 25px;
+}
+.ui-datepicker a:hover {
+    border: none;
+}
+
+
+#pricePerGallon, #totalAmtDue {
+    font-family: "Neue Montreal";
+    font-size: 19pt;
+}
+
+
+/* Pricing Module */
+
+.pricing-field {
+    margin: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pricing-field:first-of-type {
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: #6a6a6a 1px solid;
+}
+
 
