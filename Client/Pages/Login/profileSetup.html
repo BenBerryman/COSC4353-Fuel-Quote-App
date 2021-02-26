@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Profile Setup</title>
     <link rel="stylesheet" href="../../Components/styling.css">
 </head>
 <body>
@@ -10,21 +10,15 @@
 
     <div class="container loginbox">
         
-        <div class="title page-title">Login</div>
-        <form>
+        <div class="title page-title">Profile Setup</div>
+        <form method="POST" action="../Profile/mainProfile.html">
             <section class="section-content">
-                <label for="email">Email Address</label>
-                <input id="email" type="email" placeholder="">
+                <label for="email">Full Name</label>
+                <input id="email" type="text" placeholder="" required>
 
-                <label>Password</label>
-                <input id="password" type="password" placeholder="">
             </section>
 
-
-
-               
-            <div class="nextPageButtonHolder"><button class="login">Login</button></div>
-            <div class="nextPageButtonHolder"><button class="register secondary">Create an Account</button></div>
+            <div class="nextPageButtonHolder"><button class="register">Create Account</button></div>
 
                 
         </form>
@@ -37,7 +31,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="login.js"></script>
+    <script src="profileSetup.js"></script>
     <script>
         $(function(){
             $('#header').load('../../Components/header.html');

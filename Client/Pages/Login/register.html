@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="../../Components/styling.css">
 </head>
 <body>
@@ -10,21 +10,20 @@
 
     <div class="container loginbox">
         
-        <div class="title page-title">Login</div>
-        <form>
+        <div class="title page-title">Create an Account</div>
+        <form method="POST" action="profileSetup.html">
             <section class="section-content">
                 <label for="email">Email Address</label>
-                <input id="email" type="email" placeholder="">
+                <input name="email" id="email" type="email" placeholder="" required>
 
-                <label>Password</label>
-                <input id="password" type="password" placeholder="">
+                <label for="password">Password</label>
+                <input name="password" id="password" type="password" placeholder="" required>
+
+                <label for="passwordConfirm">Confirm Password</label>
+                <input id="passwordConfirm" type="password" placeholder="" required>
             </section>
 
-
-
-               
-            <div class="nextPageButtonHolder"><button class="login">Login</button></div>
-            <div class="nextPageButtonHolder"><button class="register secondary">Create an Account</button></div>
+            <div class="nextPageButtonHolder"><button type="submit" id="next">Next</button></div>
 
                 
         </form>
@@ -37,7 +36,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="login.js"></script>
     <script>
         $(function(){
             $('#header').load('../../Components/header.html');
