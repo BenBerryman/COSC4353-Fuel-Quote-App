@@ -65,6 +65,11 @@ a:hover {
 .indent-small {
     margin-left: 50px;
 }
+button {
+    transition: background-color 0.15s linear,
+    color 0.15s linear;
+    cursor: pointer;
+}
 
 /* Page Titles, Page Selectors, Headers */
 
@@ -236,10 +241,9 @@ button.page-title:hover {
 
 .nextPage {
     margin: 20px 0;
-
 }
 
-.nextPage button:last-of-type {
+.nextPageButtonHolder button {
     margin-top: 20px;
     font-family: "Neue Montreal";
     background-color: #8390d5;
@@ -248,6 +252,7 @@ button.page-title:hover {
     font-size: 16pt;
     padding: 8px 16px;
     color: white;
+
 }
 
 .nextPageButtonHolder {
@@ -334,12 +339,8 @@ input[type=number]::-webkit-outer-spin-button {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-button {
-    transition: background-color 0.15s linear,
-                color 0.15s linear;
-    cursor: pointer;
-}
-.edit button:hover {
+
+.edit button:hover, .nextPageButtonHolder button:hover {
     background-color: #6a6a6a;
 }
 
