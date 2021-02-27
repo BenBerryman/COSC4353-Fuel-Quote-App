@@ -504,7 +504,7 @@ input[type="text"], input[type="email"], input[type="password"] {
     font-size: 12pt;
     padding: 8px;
     background-color: transparent;
-    border: white 1px solid;
+    border: #6a6a6a 1px solid;
     border-radius: 3px;
     color: inherit;
     font-family: "Avenir Next LT Pro";
