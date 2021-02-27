@@ -14,7 +14,7 @@
 <div id="header"></div>
 
 <div class="container">
-    <form action="">
+    <form method="post" action="purchaseConfirm.html">
         <div class="title page-title">Get a Quote</div>
         <div class="section profile">
             <img src="https://www.w3schools.com/w3images/avatar2.png" alt="" class="profilePic">
@@ -54,7 +54,7 @@
                         <button class="increment-down">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <input type="number" min="0">
+                        <input name="gallons" type="number" min="0" required>
                         <button class="increment-up">
                             <i class="fas fa-plus"></i>
                         </button>
@@ -68,7 +68,7 @@
                         <i class="far fa-calendar-alt" style="font-size: 14pt; color: #6a6a6a; margin-right: 5px;"></i>
                         <input class="noFocus" id="date" type="text" required
                                oninvalid="this.setCustomValidity('This field is required.')" onchange="this.setCustomValidity('')">
-                        <input id="alt-date" type="hidden">
+                        <input name="date" id="alt-date" type="hidden">
                     </div>
 
                 </div>
