@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>F&Umacr;LR - Login</title>
     <link rel="stylesheet" href="../../Components/styling.css">
 </head>
 <body>
@@ -11,27 +11,18 @@
     <div class="container loginbox">
         
         <div class="title page-title">Login</div>
-        <form>
+        <form method="post" action="../Profile/mainProfile.html">
             <section class="section-content">
                 <label for="email">Email Address</label>
-                <input id="email" type="email" placeholder="">
+                <input name="email" id="email" type="email" placeholder="">
 
                 <label>Password</label>
-                <input id="password" type="password" placeholder="">
+                <input name="password" id="password" type="password" placeholder="">
             </section>
 
-
-
-               
-            <div class="nextPageButtonHolder"><button class="login">Login</button></div>
-            <div class="nextPageButtonHolder"><button class="register secondary">Create an Account</button></div>
-
-                
+            <div class="nextPageButtonHolder"><button type="submit" class="loginRegisterButton">Login</button></div>
+            <div class="nextPageButtonHolder"><button id="createAccount" class="loginRegisterButton secondary">Create an Account</button></div>
         </form>
-            <p>
-
-                By Signing in you agree to the our websites terms and conditions. Please see our website policy
-            </p>
         
     </div>
 
@@ -42,6 +33,10 @@
         $(function(){
             $('#header').load('../../Components/header.html');
         });
+        document.getElementById("createAccount").onclick = function(event) {
+            window.location.href='./register.html';
+            event.preventDefault();
+        };
     </script>
 </body>
 </html>

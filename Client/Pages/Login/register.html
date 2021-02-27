@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>F&Umacr;LR - Register</title>
     <link rel="stylesheet" href="../../Components/styling.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <div class="container loginbox">
         
         <div class="title page-title">Create an Account</div>
-        <form method="POST" action="profileSetup.html">
+        <form method="post" action="profileSetup.html">
             <section class="section-content">
                 <label for="email">Email Address</label>
                 <input name="email" id="email" type="email" placeholder="" required>
@@ -23,15 +23,11 @@
                 <input id="passwordConfirm" type="password" placeholder="" required>
             </section>
 
-            <div class="nextPageButtonHolder"><button type="submit" id="next">Next</button></div>
+            <div class="nextPageButtonHolder"><button type="submit" class="loginRegisterButton">Create Account</button></div>
 
                 
         </form>
-            <p>
-
-                By Signing in you agree to the our websites terms and conditions. Please see our website policy
-            </p>
-        
+        <span class="legalInfo">By creating an account you agree to the our website's terms and conditions. Please see our privacy policy.</span>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

@@ -230,7 +230,7 @@ button.page-title:hover {
     align-items: center;
 }
 
-.edit button:last-of-type {
+.edit button {
     margin-left: auto;
     font-family: "Avenir Next LT Pro";
     background-color: transparent;
@@ -341,7 +341,11 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom-right-radius: 3px;
 }
 
-.edit button:hover, .nextPageButtonHolder button:hover {
+/*.edit button:hover, .nextPageButtonHolder button:hover {*/
+/*    background-color: #6a6a6a;*/
+/*}*/
+
+button:hover {
     background-color: #6a6a6a;
 }
 
@@ -386,6 +390,7 @@ input#date {
 }
 .ui-datepicker th {
     padding: 0 .5rem;
+    background-color: transparent;
 }
 .ui-datepicker {
     width: 15em;
@@ -455,10 +460,36 @@ input#date {
 
 /* Tables */
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#quoteHistory th {
+    font-family: "Neue Montreal";
+    background-color: #8390d5;
+    padding: 11px 7px;
+    font-size: 12pt;
+}
+#quoteHistory th:first-of-type {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#quoteHistory th:last-of-type {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#quoteHistory td:not(:first-of-type) {
+    border-left: #6a6a6a 1px solid;
+}
+#quoteHistory td {
+    font-family: "Avenir Next LT Pro";
+    text-align: center;
+    font-size: 11pt;
+    padding: 20px 7px;
+}
 
 /*Login*/
 .loginbox{
-
     width: 300px;
     margin-top: 200px;
     display: flex;
@@ -466,19 +497,6 @@ input#date {
     border-radius: 5px;
     border: #6a6a6a 1px solid;
     padding: 20px;
-}
-
-.loginbox > h1 {
-
-    font-weight: 500;
-    margin-bottom: 20px;
-
-}
-.loginbox > form > h5 {
-
-    margin-bottom: 5px;
-
-
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
@@ -492,176 +510,16 @@ input[type="text"], input[type="email"], input[type="password"] {
     font-family: "Avenir Next LT Pro";
 }
 
-.loginbox > p {
-
+.legalInfo {
+    font-family: "Avenir Next LT Pro";
     margin-top: 15px;
     font-size: 12px;
-
 }
 
-.login, .register, #next {
+.loginRegisterButton, #next {
     width: 100%;
-    margin-top: 20px;
-    border-color: #a88734 #9c7e31 #846a29;
 }
 
 button.secondary {
     background-color: #6a6a6a;
 }
-
-
-/*Registration*/
-
-.name{
-    
-    margin-left: 25px;
-    margin-top: 30px;
-    width: 125px;
-    font-weight: 700;
-    margin-bottom: 30px;
-}
-
-.firstname{
-    
-    position: relative;
-    left: 200px;
-    top: 10px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22px;
-    font-size: 16px;
-    
-}
-
-.lastname{
-    
-    position: relative;
-    left: 480px;
-    top: -34px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22px;
-    font-size: 16px;
-    
-}
-
-.company{
-    
-    margin-top: 20px;
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    width: 180px;
-    border-radius:6px;
-    padding: 0 22px;
-    font-size: 16px;
-    
-    
-}
-
-.email{
-    
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22px;
-    font-size: 16px;
-    width: 180px;
-    
-}
-
-.code{
-    
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22px;
-    font-size: 16px;
-    width: 180px;
-    
-}
-
-.line1{
-    
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22;
-    font-size: 16px;
-    width: 300px;
-    
-}
-.line2{
-    
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22;
-    font-size: 16px;
-    width: 300px;
-    margin-left: 20px
-    
-}
-
-.city{
-    
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22;
-    font-size: 16px;
-    width: 200px;
-    
-}
-.state{
-    
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22;
-    font-size: 16px;
-    width: 200px;
-    
-}
-
-.zip{
-    
-    position: relative;
-    left: 200px;
-    top: -37px;
-    line-height: 40px;
-    border-radius: 6px;
-    padding: 0 22;
-    font-size: 16px;
-    width: 200px;
-    
-}
-
-.login2 {
-    
-    position: relative;
-    background: #B6FF33;
-    border-radius: 2px;
-    width: 300px;
-    height: 30px;
-    border: 1px solid;
-    border-color: #a88734 #9c7e31 #846a29;   
-    right: 620px;
-    margin-top: 100px;
-    
-    
-}
-
