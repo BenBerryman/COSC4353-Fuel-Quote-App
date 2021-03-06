@@ -11,7 +11,11 @@ function edit(section) {
 
 function finalize(section) {
     var editField = section.querySelector("div");
-
+    var data = editField.innerHTML;
+    fetch('http://localhost:5000/mainProfile',
+        {method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({data: data})});
     editField.contentEditable = "false";
     var check = section.querySelector("button");
     var button = '<button onClick="edit(this.parentElement)">Edit</button>';
