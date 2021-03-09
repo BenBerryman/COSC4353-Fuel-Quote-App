@@ -5,6 +5,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "http-server": "^0.12.3"
   }
 }

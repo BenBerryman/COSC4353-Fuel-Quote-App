@@ -17,23 +17,48 @@ function checkValid(input) {
         input.value = null;
     }
 }
+
+async function confirmPurchase(addressNum, fuelAmount, deliveryDate) {
+    let resp = await fetch("http://localhost:5000/purchaseConfirm",
+        {method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                addressNum: addressNum,
+                fuelAmount: fuelAmount,
+                deliveryDate: deliveryDate
+            })});
+    return resp.status;
+}
 $(document).ready(function() {
     var numberIncrementField = document.querySelector(".number-incrementer")
     document.querySelector(".increment-down")
         .addEventListener('click', (event) => {
             stepDown(numberIncrementField.querySelector('input[type=number]'));
             event.preventDefault();
-        })
+        });
 
     document.querySelector(".increment-up")
         .addEventListener('click', (event) => {
             stepUp(numberIncrementField.querySelector('input[type=number]'));
             event.preventDefault();
-        })
+        });
 
     document.querySelector(".number-incrementer input").addEventListener('input', function() {
         checkValid(this);
-    })
+    });
+
+    document.getElementsByTagName("form")[0].onsubmit = function(event) {
+        event.preventDefault();
+        let addressNum = document.getElementById("addressNum").innerHTML;
+        let fuelAmount = document.getElementById("gallons").value;
+        let deliveryDate = document.getElementById("alt-date").value;
+        confirmPurchase(addressNum, fuelAmount, deliveryDate).then(respCode => {
+            if (respCode == 200) {
+                document.location.href = "http://localhost:8000/FuelQuote/PurchaseConfirm.html"
+            }
+        });
+    }
+
 
     var today = new Date();
     var max = new Date();
