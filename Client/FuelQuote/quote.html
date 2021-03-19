@@ -4,10 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>F&Umacr;LR</title>
-    <!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">-->
+
+
+<!--            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">-->
     <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="/Components/styling.css">
     <script src="https://kit.fontawesome.com/44362617d9.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -29,19 +33,20 @@
             <div class="section-content indent-small">
                 <div class="data-field">
                     <span>Street:</span>
-                    <div class="text-input street">4855 Apple Avenue</div>
+                    <div class="text-input street" id="street">4855 Apple
+                        Avenue</div>
                 </div>
                 <div class="data-field">
                     <span>City:</span>
-                    <div class="text-input city">Silicon Valley</div>
+                    <div class="text-input city" id="city">Silicon Valley</div>
                 </div>
                 <div class="data-field">
                     <span>State:</span>
-                    <div class="text-input state">CA</div>
+                    <div class="text-input state" id="state">CA</div>
                 </div>
                 <div class="data-field">
                     <span>ZIP Code:</span>
-                    <div class="text-input zip">12345-6789</div>
+                    <div class="text-input zip" id="zip">12345-6789</div>
                 </div>
             </div>
         </div>
@@ -55,7 +60,11 @@
                         <button class="increment-down">
                             <i class="fas fa-minus"></i>
                         </button>
-                        <input id="gallons" name="gallons" type="number" min="0" required>
+                        <input id="gallons"
+                               name="gallons"
+                               type="number"
+                               min="0"
+                               required>
                         <button class="increment-up">
                             <i class="fas fa-plus"></i>
                         </button>
@@ -80,12 +89,14 @@
         <div class="section bold">
             <div class="pricing-field">
                 <span>Price Per Gallon</span>
-                <div id="pricePerGallon"><sup>$ </sup>4.50</div>
+                <div id="pricePerGallon"><sup>$ </sup><span id="ppg">4
+                    .50</span></div>
             </div>
 
             <div class="pricing-field">
                 <span>Total Amount Due</span>
-                <div id="totalAmtDue"><sup>$ </sup>50.00</div>
+                <div id="totalAmtDue"><sup>$ </sup>
+                    <span id="dueAmt">50.00</span></div>
             </div>
 
         </div>
@@ -98,6 +109,28 @@
 
         </div>
     </form>
+
+<!--    let quantity = document.getElementById("gallons").value;-->
+<!--    let deliveryDate = document.getElementById("date").value;-->
+<!--    let amount =  document.getElementById("dueAmt").innerHTML;-->
+
+
+<!--    let addressNum = document.getElementById("addressNum").innerHTML;-->
+<!--    let city = document.getElementById("city").innerHTML;-->
+<!--    let state = document.getElementById("state").innerHTML;-->
+<!--    let zip = document.getElementById("zip").innerHTML;-->
+    <table class="table table-dark" id="quoteHistory">
+        <tr id="head">
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>date</th>
+            <th>gallons</th>
+            <th>Amount</th>
+        </tr>
+
+    </table>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
