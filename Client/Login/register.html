@@ -11,7 +11,7 @@
     <div class="container loginbox">
         
         <div class="title page-title">Create an Account</div>
-        <form method="post" action="profileSetup.html">
+        <form method="post" action="profileSetup.html" id="reg-form">
             <section class="section-content">
                 <label for="email">Email Address</label>
                 <input name="email" id="email" type="email" placeholder="" required>
@@ -19,14 +19,46 @@
                 <label for="password">Password</label>
                 <input name="password" id="password" type="password" placeholder="" required>
 
-                <label for="passwordConfirm">Confirm Password</label>
-                <input id="passwordConfirm" type="password" placeholder="" required>
-            </section>
-
+                <!--<label for="passwordConfirm">Confirm Password</label>
+                <input id="passwordConfirm" type="ConfirmPassword" placeholder="" required>
+                </section>-->
+                
+            
             <div class="nextPageButtonHolder"><button type="submit" class="loginRegisterButton">Create Account</button></div>
 
                 
         </form>
+
+<script>
+
+const form = document.getElementById('reg-form')
+form.addEventListener('submit', registerUser)
+
+console.log('here')
+
+async function registerUser(event) {
+
+    event.preventDefault()
+    const email = document.getElementById('email').nodeValue
+    const password = document.getElementById('password').nodeValue
+
+    const result =  await fetch('http://localhost:8000/Login/register', {
+
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+
+            email, 
+            password
+
+        })
+        }).then((res) => res.json())
+
+        console.log(result)
+    }
+    </script>
         <span class="legalInfo">By creating an account you agree to the our website's terms and conditions. Please see our privacy policy.</span>
     </div>
 
@@ -37,5 +69,6 @@
             $('#header').load('../../Components/header.html');
         });
     </script>
+    
 </body>
 </html>
