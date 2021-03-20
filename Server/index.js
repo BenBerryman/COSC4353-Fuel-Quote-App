@@ -27,6 +27,9 @@ app.get('/', async(req, res)=>{
 app.post('/mainProfile', async(req, res)=>{
     try
     {
+
+        //Successful post!
+        res.sendStatus(200);
         console.log(req.body);
     } catch(err) {
         console.log(err.message);
@@ -42,6 +45,7 @@ app.put('/mainProfile', async(req, res)=> {
         let field = req.body.field;
         let data = req.body.data;
         console.log(`Push to DB for client ${client} with target ${target}, field ${field}, and data ${data}`);
+        res.sendStatus(200);
         //PUSH TO DATABASE FOR SPECIFIC CLIENT HERE
 
     } catch(err) {
