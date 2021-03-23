@@ -35,35 +35,8 @@ async function confirmPurchase(address, quantity, deliveryDate, amount) {
     return resp.status;
 }
 
-async function purchaseHistory() {
-    let resp = await fetch("http://localhost:5000/")
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(myJson) {
-
-            for (let i = 0; i < myJson.length; i++) {
-                let row = myJson[i];
-                $("#head").after(
-                    "<tr>" +
-                    "<td>"+row.address.addressNum+"</td>"+
-                    "<td>"+row.address.city+"</td>"+
-                    "<td>"+row.address.state+"</td>"+
-                    "<td>"+row.address.zip+"</td>"+
-                    "<td>"+row.deliveryDate+"</td>"+
-                    "<td>"+row.quantity+"</td>"+
-                    "<td>"+row.amount+"</td>"+
-                    "</tr>" );
-
-            }
-
-
-        });
-
-}
 
 $(document).ready(function() {
-    purchaseHistory();
 
     var numberIncrementField = document.querySelector(".number-incrementer")
     document.querySelector(".increment-down")
