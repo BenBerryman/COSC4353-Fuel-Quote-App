@@ -27,10 +27,13 @@ app.get('/', async(req, res)=>{
 app.post('/mainProfile', async(req, res)=>{
     try
     {
-
-        //Successful post!
+        let name = req.body.name;
+        let street = req.body.street;
+        let city = req.body.city;
+        let state = req.body.state;
+        let zip = req.body.zip;
+        console.log(`Push to DB for client ${name} with info: Street ${street}, City ${city}, State ${state}, ZIP ${zip}`);
         res.sendStatus(200);
-        console.log(req.body);
     } catch(err) {
         console.log(err.message);
     }
@@ -45,9 +48,8 @@ app.put('/mainProfile', async(req, res)=> {
         let field = req.body.field;
         let data = req.body.data;
         console.log(`Push to DB for client ${client} with target ${target}, field ${field}, and data ${data}`);
-        res.sendStatus(200);
         //PUSH TO DATABASE FOR SPECIFIC CLIENT HERE
-
+        res.sendStatus(200);
     } catch(err) {
         console.log(err.message);
     }
@@ -71,12 +73,28 @@ app.post('/login', async(req, res)=>{
 app.post('/purchaseConfirm', async(req, res)=>{
     try
     {
+        const address = req.body.address;
+        const quantity = req.body.quantity;
+        const deliveryDate = req.body.deliveryDate;
+        const amount = req.body.amount;
+        console.log(`Purchase confirmed: Address ${address}, Quantity ${quantity}, Delivery Date ${deliveryDate}, Amount ${amount}`);
         res.sendStatus(200);
-
     } catch(err) {
         console.log(err.message);
     }
 });
+app.post('/register', async(req, res)=> {
+    try {
+    console.log('Registered!');
+
+    // DB REGISTRATION HERE
+
+    res.sendStatus(200);
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+
 app.delete('/', async(req, res) => {
     try {
 
