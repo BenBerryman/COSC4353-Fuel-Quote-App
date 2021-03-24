@@ -8,4 +8,4 @@ user: fulr
 pass: fulr
 
 
-TODO: Create MongoDb cloud aacount so that I can send invitations
+TODO: Create MongoDb cloud account so that I can send invitations
