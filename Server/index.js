@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const connectDB = require('./test/connection')
 // const pool = require('./db');
 const cors = require('cors');
 
