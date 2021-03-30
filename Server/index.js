@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
-const connectDB = require('./test/connection')
+// const connectDB = require('./test/connection')
 // const pool = require('./db');
 const cors = require('cors');
+const crypto = require('crypto-js');
 
 // middleware
 app.use(cors());
@@ -28,11 +29,8 @@ app.get('/', async(req, res)=>{
 app.post('/mainProfile', async(req, res)=>{
     try
     {
-        let name = req.body.name;
-        let street = req.body.street;
-        let city = req.body.city;
-        let state = req.body.state;
-        let zip = req.body.zip;
+        let {name, street, city, state, zip} = req.body;
+
         console.log(`Push to DB for client ${name} with info: Street ${street}, City ${city}, State ${state}, ZIP ${zip}`);
         res.sendStatus(200);
     } catch(err) {
@@ -44,10 +42,8 @@ app.post('/mainProfile', async(req, res)=>{
 app.put('/mainProfile', async(req, res)=> {
     try {
 
-        let client = req.body.client;
-        let target = req.body.target;
-        let field = req.body.field;
-        let data = req.body.data;
+        let {client, target, field, data} = req.body;
+
         console.log(`Push to DB for client ${client} with target ${target}, field ${field}, and data ${data}`);
         //PUSH TO DATABASE FOR SPECIFIC CLIENT HERE
         res.sendStatus(200);
@@ -59,10 +55,13 @@ app.put('/mainProfile', async(req, res)=> {
 app.post('/login', async(req, res)=>{
     try
     {
-        let email = req.body.email;
-        let password = req.body.password;
+        let {email, password} = req.body;
 
-        //DATABASE LOGIN VALIDATION HERE
+        //Get salt and password hash from DB
+        //const salt, storedHash = DB GET
+        //hashedPassword = crypto.SHA3(salt + password).toString();
+        //if (hashedPassword == storedHash) CORRECT PW
+
 
         console.log('Logged in!');
         res.sendStatus(200);
@@ -74,10 +73,8 @@ app.post('/login', async(req, res)=>{
 app.post('/purchaseConfirm', async(req, res)=>{
     try
     {
-        const address = req.body.address;
-        const quantity = req.body.quantity;
-        const deliveryDate = req.body.deliveryDate;
-        const amount = req.body.amount;
+        const {address, quantity, deliveryDate, amount} = req.body;
+
         console.log(`Purchase confirmed: Address ${address}, Quantity ${quantity}, Delivery Date ${deliveryDate}, Amount ${amount}`);
         res.sendStatus(200);
     } catch(err) {
@@ -86,11 +83,15 @@ app.post('/purchaseConfirm', async(req, res)=>{
 });
 app.post('/register', async(req, res)=> {
     try {
-    console.log('Registered!');
 
-    // DB REGISTRATION HERE
+        const {email, password} = req.body;
+        const salt = Math.random().toString(36).substring(10); //Password salting to prevent pre-computation attacks
+        const hashedPassword = crypto.SHA3(salt + password).toString();
 
-    res.sendStatus(200);
+        // DB REGISTRATION HERE
+
+        console.log('Registered!');
+        res.sendStatus(200);
     } catch (err) {
         console.log(err.message);
     }
