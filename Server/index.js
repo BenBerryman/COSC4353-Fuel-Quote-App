@@ -24,6 +24,7 @@ mongoose.connect(URI, {
 
 
 /**********DATABASE CONNECTION TEST DELETE LATER**********************/
+/* open compass while running to see interaction */
 user = new User({
 
     email:'Mynameisbob223@gmail.com',
@@ -34,9 +35,24 @@ user = new User({
 
     History:[{pricePerGallon: 1.50, gallons: 125678}]
 
-})
+});
 
+console.log('Item stored in DB')
 user.save();
+
+
+function clearTest(){
+
+    User.findByIdAndRemove({_id: user._id}).then(() => {
+
+        console.log('Removed item from DB')
+
+    })
+
+}
+
+//Clears Test after some time so you can see the database interaction
+setTimeout(clearTest, 5000);
 
 // middleware
 app.use(cors());
