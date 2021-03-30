@@ -22,7 +22,6 @@ mongoose.connect(URI, {
 
 })
 
-
 /**********DATABASE CONNECTION TEST DELETE LATER**********************/
 /* open compass while running to see interaction */
 user = new User({
@@ -37,7 +36,7 @@ user = new User({
 
 });
 
-console.log('Item stored in DB')
+console.log('Item stored in DB, will take 10 seconds to delete....')
 user.save();
 
 
@@ -45,14 +44,14 @@ function clearTest(){
 
     User.findByIdAndRemove({_id: user._id}).then(() => {
 
-        console.log('Removed item from DB')
+        console.log('Removed item from DB');
 
     })
 
 }
 
 //Clears Test after some time so you can see the database interaction
-setTimeout(clearTest, 5000);
+setTimeout(clearTest, 10000);
 
 // middleware
 app.use(cors());
