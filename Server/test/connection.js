@@ -22,7 +22,7 @@ before(function(done){
 
     });
 
-       //Drop the characters collection before each test
+    //Drop the characters collection before each test
         beforeEach(function(done){
 
         //Drop the collection
@@ -32,11 +32,10 @@ before(function(done){
 
         });     
 
-    }); 
+    });
 
 });
 
-module.exports
 
 
 

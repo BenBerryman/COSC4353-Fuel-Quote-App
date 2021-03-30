@@ -10,7 +10,8 @@ describe('Saving records', function(){
 
         var person = new User({
 
-            name: 'Shahrukh',
+            email: 'bobisthebest23@gmail.com',
+            UserInfo: [{firstName: 'bob', lastName: 'crazy' }]
 
         });
 
