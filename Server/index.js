@@ -1,13 +1,48 @@
 const express = require('express');
 const app = express();
-// const connectDB = require('./test/connection')
-// const pool = require('./db');
+const mongoose = require('mongoose');
+
+//User model import
+const User = require('./models/userModel')
+
 const cors = require('cors');
 const crypto = require('crypto-js');
+
+
+//Database Connection
+const URI = "mongodb+srv://fulr:fulr@cluster0.3vuf3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+mongoose.connect(URI, {
+
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+
+}).then(() => {
+
+    console.log('Database Connection established')
+
+})
+
+
+/**********DATABASE CONNECTION TEST DELETE LATER**********************/
+user = new User({
+
+    email:'Mynameisbob223@gmail.com',
+    password: 'asdasdjadasdhasjd', 
+
+    UserInfo: [{firstname: 'Bob', lastname: 'King', street: '1234 Avenue blvd.',
+    zip: 77407, city: 'Houston'}], 
+
+    History:[{pricePerGallon: 1.50, gallons: 125678}]
+
+})
+
+user.save();
 
 // middleware
 app.use(cors());
 app.use(express.json());      //req.body
+
+
 
 //ROUTES
 
