@@ -11,7 +11,7 @@ const crypto = require('crypto-js');
 
 //Database Connection
 const URI = "mongodb+srv://fulr:fulr@cluster0.3vuf3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-mongoose.connect(URI, {
+ mongoose.connect(URI, {
 
     useUnifiedTopology: true,
     useNewUrlParser: true
@@ -36,8 +36,13 @@ user = new User({
 
 });
 
-console.log('Item stored in DB, will take 10 seconds to delete....')
-user.save();
+
+user.save().then(() => {
+
+    console.log('Item stored in DB, will take 10 seconds to delete....')
+
+});
+
 
 
 function clearTest(){
