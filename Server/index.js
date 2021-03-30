@@ -42,7 +42,7 @@ user.save();
 
 function clearTest(){
 
-    User.findByIdAndRemove({_id: user._id}).then(() => {
+    User.deleteOne({_id: user._id}).then(() => {
 
         console.log('Removed item from DB');
 
