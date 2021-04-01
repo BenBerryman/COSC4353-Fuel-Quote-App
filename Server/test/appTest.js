@@ -12,14 +12,33 @@ describe('Fuel Routes', () => {
     //Tests to be performed
 
     describe('Post Routes tested here.', (done) => {
+
+        //Purchase simulation.
+        it('Fuel Purchase Simulation', (done) => {
+            chai.request(app)
+            .get('/purchase')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                done();
+             });
+        });
+        it('Home Page', (done) => {
+            chai.request(app)
+                .get('/')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
         it('it should show status of register', (done) => {
             chai.request(app)
                 .get('/register')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
-                    res.body.length.should.be.eq(3);
-                done();
+                    done();
                 });
         });
         it('if you visit the wrong register route', (done) => {
@@ -47,7 +66,7 @@ describe('Fuel Routes', () => {
                 .get('/logout')
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.body.should.be.a('object');
+                    res.body.should.be.a('session');
                     res.body.should.have.property('session');
                     res.body.should.have.property('delete');
 
