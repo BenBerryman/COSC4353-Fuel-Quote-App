@@ -12,6 +12,19 @@ body {
 .homepage {
     margin: 0;
 }
+#pageCover {
+    font-family: "Neue Montreal";
+    font-size: 40pt;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left: 0;
+    z-index:9999;
+    background: #1F1E25;
+}
 
 .container {
     width: 800px;
@@ -189,6 +202,7 @@ button.page-title:hover {
     font-size: 15pt;
     text-align: center;
 }
+
 .cover-title {
     font-size: 70pt;
     margin-bottom: 0 !important;

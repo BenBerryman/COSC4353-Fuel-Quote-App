@@ -7,11 +7,9 @@ const UserSchema = new Schema({
     firstName: String,
     lastName: String,
     street: String,
-    zip: Number,
     city: String,
     state: String,
-   
-
+    zip: Number
 });
 
 const QuoteHistorySchema = new Schema({
@@ -23,9 +21,7 @@ const QuoteHistorySchema = new Schema({
     deliveryDate: Date, 
     gallons: Number ,
     pricePerGallon: Number, 
-    amount: Number 
-   
-
+    amount: Number
 });
 
 const AuthenticationSchema = new Schema({
@@ -36,8 +32,6 @@ const AuthenticationSchema = new Schema({
 
     UserInfo: [UserSchema],
     History: [QuoteHistorySchema]
-
-
 });
 
 const User = mongoose.model('users', AuthenticationSchema);

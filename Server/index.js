@@ -66,32 +66,43 @@ app.use(express.json());      //req.body
 
 //ROUTES
 
-// pool.connect(async(err, client, done) => {
-//
-//     done();
-// });
-
-app.get('/', async(req, res)=>{
-    try{
-
-    }
-    catch(err){
-        console.log(err.message);
-    }
-});
-
 //Setup user profile for first time
 app.post('/mainProfile', async(req, res)=>{
     try
     {
-        let {name, street, city, state, zip} = req.body;
-
-        console.log(`Push to DB for client ${name} with info: Street ${street}, City ${city}, State ${state}, ZIP ${zip}`);
+        let {userID, name, street, city, state, zip} = req.body;
+        let firstName = name.split(' ')[0];
+        let lastName = name.split(' ')[1];
+        User.findById(userID, (error, user)=> {
+            user.UserInfo = {
+                firstName: firstName,
+                lastName: lastName,
+                street: street,
+                city: city,
+                state: state,
+                zip: zip
+            };
+            user.save();
+        });
         res.sendStatus(200);
     } catch(err) {
         console.log(err.message);
     }
 });
+
+app.get('/getUserById', async(req, res)=> {
+    try {
+        const {userID} = req.query;
+        User.findById(userID, function(error, user){
+            res.status(200).json({
+                history: user.History,
+                userInfo: user.UserInfo
+            });
+        });
+    } catch (err) {
+        console.log(err.message);
+    }
+})
 
 //Update info on user profile
 app.put('/mainProfile', async(req, res)=> {
@@ -100,6 +111,7 @@ app.put('/mainProfile', async(req, res)=> {
         let {client, target, field, data} = req.body;
 
         console.log(`Push to DB for client ${client} with target ${target}, field ${field}, and data ${data}`);
+        //TODO User Profile Update
         //PUSH TO DATABASE FOR SPECIFIC CLIENT HERE
         res.sendStatus(200);
     } catch(err) {
@@ -111,11 +123,14 @@ app.post('/login', async(req, res)=>{
     try
     {
         let {email, password} = req.body;
-
+        User.find({email: email}).then((result)=> {
+            console.log(result);
+        })
+        //TODO Login
         //Get salt and password hash from DB
-        //const salt, storedHash = DB GET
-        //hashedPassword = crypto.SHA3(salt + password).toString();
-        //if (hashedPassword == storedHash) CORRECT PW
+        // const salt, storedHash =
+        hashedPassword = crypto.SHA3(salt + password).toString();
+        // if (hashedPassword == storedHash) CORRECT PW
 
 
         console.log('Logged in!');
@@ -129,37 +144,35 @@ app.post('/purchaseConfirm', async(req, res)=>{
     try
     {
         const {address, quantity, deliveryDate, amount} = req.body;
-
+        //TODO Fuel Quote Purchase
         console.log(`Purchase confirmed: Address ${address}, Quantity ${quantity}, Delivery Date ${deliveryDate}, Amount ${amount}`);
         res.sendStatus(200);
     } catch(err) {
         console.log(err.message);
     }
 });
+
 app.post('/register', async(req, res)=> {
     try {
-
+        let userID;
         const {email, password} = req.body;
         const salt = Math.random().toString(36).substring(10); //Password salting to prevent pre-computation attacks
         const hashedPassword = crypto.SHA3(salt + password).toString();
 
-        // DB REGISTRATION HERE
+        var user = new User({
+            email: email,
+            hashedPassword: hashedPassword,
+            salt: salt
+        });
+        user.save((error, user)=> {
+            userID = user.id;
+            res.status(200).json({userID: userID});
+        });
 
-        console.log('Registered!');
-        res.sendStatus(200);
     } catch (err) {
         console.log(err.message);
     }
 });
-
-app.delete('/', async(req, res) => {
-    try {
-
-    } catch(err) {
-        console.log(err.message);
-    }
-});
-
 
 // set up the server listening at port 5000 (the port number can be changed)
 app.listen(5000, ()=>{

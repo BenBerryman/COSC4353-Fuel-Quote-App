@@ -10,7 +10,7 @@
     <script src="https://kit.fontawesome.com/44362617d9.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<div id="pageCover"></div>
 <div id="header"></div>
 
 <div class="container">
@@ -169,8 +169,11 @@
 <script src="mainProfile.js"></script>
 <script>
     $(function(){
-        $('#header').load('../../Components/header.html');
-
+        $('#header').load('../../Components/header.html', ()=> {
+            $.getScript('../Components/cookieManager.js').then(()=> {
+                $('#pageCover').fadeOut(500);
+            });
+        });
     });
 </script>
 

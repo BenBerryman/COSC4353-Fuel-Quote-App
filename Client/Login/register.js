@@ -4,8 +4,9 @@ document.getElementsByTagName('form')[0].onsubmit = function(event) {
     event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    registerUser(email, password).then(respCode => {
-        if (respCode == 200) { //Successful registration
+    registerUser(email, password).then(response => {
+        if (response[0] === 200) { //Successful registration
+            document.cookie = `userID=${response[1].userID};path=/;secure;SameSite=Strict`;
             window.location.href = "http://localhost:8000/Login/profileSetup.html";
         }
     });
@@ -22,5 +23,6 @@ async function registerUser(email, password) {
             email: email,
             password: password
         })});
-    return result.status;
+    const response = await result.json();
+    return [result.status, response];
 }
