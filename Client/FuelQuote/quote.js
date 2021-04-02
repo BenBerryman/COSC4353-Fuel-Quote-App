@@ -17,17 +17,55 @@ function checkValid(input) {
         input.value = null;
     }else {
         let val= input.value;
-        document.getElementById("dueAmt").innerHTML = (val*4.50)+"";
     }
 }
 
-async function confirmPurchase(address, quantity, deliveryDate, amount) {
+function pricing() {
+    // Get the input box
+    let gallons = document.getElementById('gallons');
+
+    // Init a timeout variable to be used below
+    let timeout = null;
+
+    // Listen for input change events
+    gallons.addEventListener('change', function (e) {
+        // Clear the timeout if it has already been set.
+        // This will prevent the previous task from executing
+        // if it has been less than <MILLISECONDS>
+        clearTimeout(timeout);
+
+        // Make a new timeout set to go off in 1000ms (1 second)
+        timeout = setTimeout(function () {
+            // document.getElementById('dueAmt').innerHTML = getPrice();
+
+        }, 1000);
+    });
+}
+
+async function getPrice() {
+    let response = await fetch(`http://localhost:5000/price`);
+    return await response.json();
+}
+
+function getUserID() {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies)
+    {
+        if (cookie.indexOf('userID') > -1)
+        {
+            return cookie.split('=')[1];
+        }
+    }
+}
+
+async function confirmPurchase(gallons, deliveryDate, amount) {
+    const userID = getUserID();
     let resp = await fetch("http://localhost:5000/purchaseConfirm",
         {method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
-                address: address,
-                quantity: quantity,
+                userID: userID,
+                gallons: gallons,
                 deliveryDate: deliveryDate,
                 amount: amount
             })
@@ -37,7 +75,7 @@ async function confirmPurchase(address, quantity, deliveryDate, amount) {
 
 
 $(document).ready(function() {
-
+    pricing();
     var numberIncrementField = document.querySelector(".number-incrementer")
     document.querySelector(".increment-down")
         .addEventListener('click', (event) => {
@@ -57,31 +95,15 @@ $(document).ready(function() {
 
     document.getElementsByTagName("form")[0].onsubmit = function(event) {
         event.preventDefault();
-        let quantity = document.getElementById("gallons").value;
+        let gallons = document.getElementById("gallons").value;
         let deliveryDate = document.getElementById("date").value;
         let amount =  document.getElementById("dueAmt").innerHTML;
-
-
-        let addressNum = document.getElementById("addressNum").innerHTML;
-        let city = document.getElementById("city").innerHTML;
-        let state = document.getElementById("state").innerHTML;
-        let zip = document.getElementById("zip").innerHTML;
-
-
-        let address = {
-            city: city,
-            state: state,
-            zip: zip,
-            addressNum: addressNum
-        };
-
-        confirmPurchase(address, quantity, deliveryDate, amount).then(respCode => {
+        confirmPurchase(gallons, deliveryDate, amount).then(respCode => {
             if (respCode == 200) {
                 document.location.href = "http://localhost:8000/FuelQuote/purchaseConfirm.html"
             }
         });
     };
-
 
     var today = new Date();
     var max = new Date();

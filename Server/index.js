@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 
 //User model import
-const User = require('./models/userModel')
+const User = require('./models/userModel');
 
 const cors = require('cors');
 const crypto = require('crypto-js');
@@ -77,10 +77,10 @@ app.post('/mainProfile', async(req, res)=>{
             user.UserInfo = {
                 firstName: firstName,
                 lastName: lastName,
-                street1: street,
-                city1: city,
-                state1: state,
-                zip1: zip
+                street: street,
+                city: city,
+                state: state,
+                zip: zip
             };
             user.save();
         });
@@ -115,12 +115,26 @@ app.get('/getUserById', async(req, res)=> {
 app.put('/mainProfile', async(req, res)=> {
     try {
 
-        let {client, target, field, data} = req.body;
-
-        console.log(`Push to DB for client ${client} with target ${target}, field ${field}, and data ${data}`);
-        //TODO User Profile Update
-        //PUSH TO DATABASE FOR SPECIFIC CLIENT HERE
-        res.sendStatus(200);
+        let {userID, field, data} = req.body;
+        User.findById(userID, (error, user)=>{
+            if (!user) {
+                res.sendStatus(404);
+            }
+            else {
+                console.log(data);
+                if (field == 'street') {
+                    user.UserInfo[0].street = data;
+                } else if (field =='city') {
+                    user.UserInfo[0].city = data;
+                } else if (field == 'state') {
+                    user.UserInfo[0].state = data;
+                } else if (field == 'zip') {
+                    user.UserInfo[0].zip = data;
+                }
+                user.save();
+                res.sendStatus(200);
+            }
+        });
     } catch(err) {
         console.log(err.message);
     }
@@ -161,13 +175,36 @@ app.post('/login', async(req, res)=>{
 app.post('/purchaseConfirm', async(req, res)=>{
     try
     {
-        const {address, quantity, deliveryDate, amount} = req.body;
-        //TODO Fuel Quote Purchase
-        console.log(`Purchase confirmed: Address ${address}, Quantity ${quantity}, Delivery Date ${deliveryDate}, Amount ${amount}`);
-        res.sendStatus(200);
+        const {userID, gallons, deliveryDate, amount} = req.body;
+        User.findById(userID, (error, user)=>{
+            if (error) {
+                res.sendStatus(500); //500=Internal error
+            }
+            let street = user.UserInfo[0].street;
+            let city = user.UserInfo[0].city;
+            let state = user.UserInfo[0].state;
+            let zip = user.UserInfo[0].zip;
+            user.History.push({
+
+                    street: street,
+                    city: city,
+                    state: state,
+                    zip: zip,
+                    gallons: gallons,
+                    deliveryDate: deliveryDate,
+                    pricePerGallon: 6,
+                    amount: amount
+                });
+            user.save();
+            res.sendStatus(200);
+        });
     } catch(err) {
         console.log(err.message);
     }
+});
+
+app.get('/price', async(req, res)=> {
+    //TODO Implement pricing module
 });
 
 app.post('/register', async(req, res)=> {

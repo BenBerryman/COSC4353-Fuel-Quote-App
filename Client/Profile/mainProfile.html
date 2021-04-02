@@ -21,11 +21,11 @@
 
     <div class="section">
         <img src="https://www.w3schools.com/w3images/avatar2.png" alt="" class="profilePic">
-        <span class="profileName">John Doe</span>
+        <span class="profileName"></span>
     </div>
     <div id="profileInfo">
         <div class="section small">
-            <div class="section-title">Address 1</div>
+            <div class="section-title">Address</div>
             <div class="section-content indent-small">
                 <div class="data-field edit">
                     <span>Street:</span>
@@ -49,31 +49,6 @@
                 </div>
             </div>
         </div>
-        <div class="section small">
-            <div class="section-title">Address 2</div>
-            <div class="section-content indent-small">
-                <div class="data-field edit">
-                    <span>Street:</span>
-                    <div class="text-input address2 street">4855 Apple Avenue</div>
-                    <button onclick="edit(this.parentElement)">Edit</button>
-                </div>
-                <div class="data-field edit">
-                    <span>City:</span>
-                    <div class="text-input address2 city">Silicon Valley</div>
-                    <button onclick="edit(this.parentElement)">Edit</button>
-                </div>
-                <div class="data-field edit">
-                    <span>State:</span>
-                    <div class="text-input address2 state">CA</div>
-                    <button onclick="edit(this.parentElement)">Edit</button>
-                </div>
-                <div class="data-field edit">
-                    <span>ZIP Code:</span>
-                    <div class="text-input address2 zip">12345-6789</div>
-                    <button onclick="edit(this.parentElement)">Edit</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div id="quoteHistory">
@@ -85,83 +60,24 @@
                 - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not
                 building pricing module yet)
                 - Total Amount Due (numeric non-editable, calculated (gallons * price)) -->
-                <tr>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Zip Code</th>
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>Gallons</th>
+                        <th>Delivery Date</th>
+                        <th>Price/Gallon</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                    <th>Delivery Date</th>
-                    <th>Gallons</th>
-                    <th>Price/Gallon</th>
-                    <th>Amount</th>
-                </tr>
-                <tr>
-                    <td>4700 Apple Drive</td>
-                    <td>Houston</td>
-                    <td>TX</td>
-                    <td>12345-6789</td>
-
-                    <td>2020-05-01</td>
-                    <td>20</td>
-                    <td>10</td>
-                    <td>200</td>
-
-                </tr>
-                <tr>
-                    <td>3234 Google Boulevard</td>
-                    <td>El Paso</td>
-                    <td>ND</td>
-                    <td>12345-6789</td>
-
-                    <td>2020-05-01</td>
-                    <td>20</td>
-                    <td>10</td>
-                    <td>200</td>
-
-                </tr>
-                <tr>
-                    <td>5843 Yorkshire Way</td>
-                    <td>Truth or Consequences</td>
-                    <td>ND</td>
-                    <td>12345-6789</td>
-
-                    <td>2020-05-01</td>
-                    <td>20</td>
-                    <td>10</td>
-                    <td>200</td>
-
-                </tr>
-                <tr>
-                    <td>9923 Netflix Avenue</td>
-                    <td>Seattle</td>
-                    <td>ND</td>
-                    <td>12345-6789</td>
-
-                    <td>2020-05-01</td>
-                    <td>20</td>
-                    <td>10</td>
-                    <td>200</td>
-
-                </tr>
-                <tr>
-                    <td>4563 Martin Luther King Jr. Blvd</td>
-                    <td>New Yorkshire</td>
-                    <td>ND</td>
-                    <td>12345-6789</td>
-
-                    <td>2020-05-01</td>
-                    <td>20</td>
-                    <td>10</td>
-                    <td>200</td>
-
-                </tr>
+                </tbody>
             </table>
         </div>
     </div>
-
-
-
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

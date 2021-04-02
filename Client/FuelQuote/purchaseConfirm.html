@@ -32,6 +32,9 @@
 <script>
     $(function(){
         $('#header').load('../../Components/header.html');
+        $.getScript('../Components/cookieManager.js').then(()=> {
+            $('#pageCover').fadeOut(500);
+        });
     });
     document.querySelector(".loginRegisterButton").onclick = function() {
         window.location.href = "../Profile/mainProfile.html";

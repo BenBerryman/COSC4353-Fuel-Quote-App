@@ -8,17 +8,21 @@ function edit(section) {
     button.outerHTML = check;
 
 }
+function getUserID() {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies)
+    {
+        if (cookie.indexOf('userID') > -1)
+        {
+            return cookie.split('=')[1];
+        }
+    }
+}
+
 
 function finalize(section) {
     var editField = section.querySelector("div");
     var className = editField.className;
-    var target;
-    if (className.indexOf('address1') > -1)
-        target = 'address1';
-    else if (className.indexOf('address2') > -1)
-        target = 'address2';
-    else
-        target = 'null';
 
     var field;
     if (className.indexOf('street') > -1)
@@ -37,8 +41,7 @@ function finalize(section) {
         {method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
-                client: 'null',
-                target: target,
+                userID: getUserID(),
                 field: field,
                 data: data
             })});
@@ -56,10 +59,13 @@ $("#profileInfoShow").click(function() {
     $("#profileInfo").show();
     $("#quoteHistory").hide();
 
-})
+});
 $("#quoteHistoryShow").click(function() {
     $(this)[0].classList.remove("inactive");
     $("#profileInfoShow")[0].classList.add("inactive");
     $("#profileInfo").hide();
     $("#quoteHistory").show();
-})
+});
+
+
+

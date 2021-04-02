@@ -46,6 +46,30 @@ else
                 let profileName = document.getElementsByClassName('profileName')[0];
                 const fullName = `${response[1]['userInfo'][0].firstName} ${response[1]['userInfo'][0].lastName}`;
                 profileName.innerHTML = fullName;
+
+                let {street, city, state, zip} = response[1]['userInfo'][0];
+                document.getElementsByClassName('street')[0].innerHTML = street;
+                document.getElementsByClassName('city')[0].innerHTML = city;
+                document.getElementsByClassName('state')[0].innerHTML = state;
+                document.getElementsByClassName('zip')[0].innerHTML = zip;
+
+
+                let table = document.getElementById('quotes');
+                let tBody = table.getElementsByTagName('tbody')[0];
+                for (let quote of response[1]['history'])
+                {
+                    let newRow = tBody.insertRow(-1); //Index of -1 means added at the end
+
+                    (newRow.insertCell()).innerHTML = quote['street'];
+                    (newRow.insertCell()).innerHTML = quote['city'];
+                    (newRow.insertCell()).innerHTML = quote['state'];
+                    (newRow.insertCell()).innerHTML = quote['zip'];
+                    (newRow.insertCell()).innerHTML = quote['gallons'];
+                    (newRow.insertCell()).innerHTML = (new Date(quote['deliveryDate'])).toDateString();
+                    (newRow.insertCell()).innerHTML = "$" + quote['pricePerGallon'];
+                    (newRow.insertCell()).innerHTML = "$" + quote['amount'];
+
+                }
             }
         });
     }
