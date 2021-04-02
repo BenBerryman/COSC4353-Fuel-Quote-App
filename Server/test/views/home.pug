@@ -1,0 +1,50 @@
+extends layout
+
+mixin message(opp, name)
+    if(opp)
+        h5.greeting Logged in as 
+            span=name 
+    else 
+        h5.greeting Welcome 
+            span=name 
+            |  to our website
+
+
+append links 
+    li(style="float: right;")
+        a(href="/logout") Logout 
+
+block content
+    .dashboard 
+        .user 
+            +message(opp, name)
+            form(method ="post" action="/order")
+                table 
+                    tr 
+                        td Requested Gallons 
+                        td 
+                            input(type="text" name="gallons" required)
+                    tr 
+                        td Delivery Address 
+                        td 
+                            input(type="text" name="delivery" required)
+                    tr 
+                        td Delivery Date
+                        td 
+                            input(type="date" name="date" required)
+                    tr 
+                        td Total Amount
+                        td 
+                            input(type="number" name="amount" required)
+                    tr 
+                        td 
+                        td 
+                            input(type="submit", value="Order..")
+
+            table 
+                tr 
+                    th Requested Gallons 
+                    th Delivery Address 
+                    th Delivery Date 
+                    th Total Amount 
+
