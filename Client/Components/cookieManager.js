@@ -29,17 +29,26 @@ if (pageName === 'homepage.html')
         }
     });
 }
-else if (pageName === 'mainProfile.html')
+else
 {
-    const userID = getUserID();
-    getUserByID(userID).then((response)=> {
-        if (response[0] == 200 || response[0] == 304)
-        {
-            let loginRegister = document.getElementById('loginRegister');
-            loginRegister.outerHTML =
-                '<div id="loginRegister"><a href="/Profile/mainProfile.html">PROFILE</a><span class="spacer">|</span><a href="/Login/homepage.html">LOGOUT</a></div>';
-        }
-    });
+    let loginRegister = document.getElementById('loginRegister');
+    loginRegister.outerHTML =
+        '<div id="loginRegister"><a href="/Profile/mainProfile.html">PROFILE</a><span class="spacer">|</span><a id="logout" href="/homepage.html">LOGOUT</a></div>';
+    document.getElementById('logout').onclick = ()=> {
+        document.cookie = "userID=none; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+    if (pageName === 'mainProfile.html' || pageName === 'quote.html')
+    {
+        const userID = getUserID();
+        getUserByID(userID).then((response)=> {
+            if (response[0] == 200 || response[0] == 304)
+            {
+                let profileName = document.getElementsByClassName('profileName')[0];
+                const fullName = `${response[1]['userInfo'][0].firstName} ${response[1]['userInfo'][0].lastName}`;
+                profileName.innerHTML = fullName;
+            }
+        });
+    }
 }
 
 

@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<div id="pageCover"></div>
 <div id="header"></div>
 
 <div class="container">
@@ -127,7 +128,11 @@
 <script src="quote.js"></script>
 <script>
     $(function(){
-        $('#header').load('../../Components/header.html');
+        $('#header').load('../../Components/header.html', ()=> {
+            $.getScript('../Components/cookieManager.js').then(()=> {
+                $('#pageCover').fadeOut(500);
+            });
+        });
     });
 </script>
 

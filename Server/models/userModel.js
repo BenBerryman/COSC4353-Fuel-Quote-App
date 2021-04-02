@@ -6,10 +6,14 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     firstName: String,
     lastName: String,
-    street: String,
-    city: String,
-    state: String,
-    zip: Number
+    street1: String,
+    city1: String,
+    state1: String,
+    zip1: Number,
+    street2: String,
+    city2: String,
+    state2: String,
+    zip2: Number
 });
 
 const QuoteHistorySchema = new Schema({
