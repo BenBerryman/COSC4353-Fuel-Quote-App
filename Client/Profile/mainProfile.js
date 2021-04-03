@@ -1,6 +1,6 @@
 
 function edit(section) {
-    var editField = section.querySelector("div");
+    var editField = section.querySelector(".text-input");
 
     editField.contentEditable = "true";
     var check = '<button onclick="finalize(this.parentElement)"><i class="fas fa-check"></i></button>';
@@ -21,7 +21,7 @@ function getUserID() {
 
 
 function finalize(section) {
-    var editField = section.querySelector("div");
+    var editField = section.querySelector(".text-input");
     var className = editField.className;
 
     var field;
@@ -35,7 +35,6 @@ function finalize(section) {
         field = 'zip';
     else
         field = 'null';
-
     var data = editField.innerHTML;
     fetch('http://localhost:5000/mainProfile',
         {method: "PUT",

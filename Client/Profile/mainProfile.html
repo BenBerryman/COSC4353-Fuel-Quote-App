@@ -29,22 +29,22 @@
             <div class="section-content indent-small">
                 <div class="data-field edit">
                     <span>Street:</span>
-                    <div class="text-input address1 street">4855 Apple Avenue</div>
+                    <span class="text-input street"></span>
                     <button onclick="edit(this.parentElement)">Edit</button>
                 </div>
                 <div class="data-field edit">
                     <span>City:</span>
-                    <div class="text-input address1 city">Silicon Valley</div>
+                    <span class="text-input city"></span>
                     <button onclick="edit(this.parentElement)">Edit</button>
                 </div>
                 <div class="data-field edit">
                     <span>State:</span>
-                    <div class="text-input address1 state">CA</div>
+                    <span class="text-input state"></span>
                     <button onclick="edit(this.parentElement)">Edit</button>
                 </div>
                 <div class="data-field edit">
                     <span>ZIP Code:</span>
-                    <div class="text-input address1 zip">12345-6789</div>
+                    <span class="text-input zip"></span>
                     <button onclick="edit(this.parentElement)">Edit</button>
                 </div>
             </div>
@@ -53,13 +53,7 @@
 
     <div id="quoteHistory">
         <div class="section">
-            <table class="table" id="quotes">
-                <!-- Gallons Requested (numeric, required)
-                - Delivery Address (Non-editable, comes from client profile)
-                - Delivery Date (Calender, date picker)
-                - Suggested Price / gallon (numeric non-editable, price will be calculated by Pricing Module - we are not
-                building pricing module yet)
-                - Total Amount Due (numeric non-editable, calculated (gallons * price)) -->
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Address</th>
@@ -87,7 +81,7 @@
     $(function(){
         $('#header').load('../../Components/header.html', ()=> {
             $.getScript('../Components/cookieManager.js').then(()=> {
-                $('#pageCover').fadeOut(500);
+                $('#pageCover').fadeOut();
             });
         });
     });

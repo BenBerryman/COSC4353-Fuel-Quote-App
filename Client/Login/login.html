@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/Components/styling.css">
 </head>
 <body>
+    <div id="pageCover"></div>
     <div id="header"></div>
 
     <div class="container loginbox">
@@ -32,6 +33,7 @@
     <script>
         $(function(){
             $('#header').load('../../Components/header.html');
+            $('#pageCover').fadeOut();
         });
         document.getElementById("createAccount").onclick = function(event) {
             window.location.href='./register.html';

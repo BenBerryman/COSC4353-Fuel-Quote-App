@@ -116,7 +116,7 @@
     $(function(){
         $('#header').load('../../Components/header.html', ()=> {
             $.getScript('../Components/cookieManager.js').then(()=> {
-                $('#pageCover').fadeOut(500);
+                $('#pageCover').fadeOut();
             });
         });
     });

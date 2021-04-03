@@ -53,22 +53,34 @@ else
                 document.getElementsByClassName('state')[0].innerHTML = state;
                 document.getElementsByClassName('zip')[0].innerHTML = zip;
 
-
-                let table = document.getElementById('quotes');
-                let tBody = table.getElementsByTagName('tbody')[0];
-                for (let quote of response[1]['history'])
+                let quoteHistory = document.getElementById('quoteHistory');
+                let history = response[1]['history'];
+                if (history.length == 0)
                 {
-                    let newRow = tBody.insertRow(-1); //Index of -1 means added at the end
+                    quoteHistory.innerHTML = `
+                        <div class="noData">
+                            <span>No history found.</span>
+                            <span>Try requesting a quote!</span>
+                        </div>`;
+                }
+                else
+                {
+                    let table = quoteHistory.getElementsByTagName('table')[0];
+                    let tBody = table.getElementsByTagName('tbody')[0];
+                    for (let quote of history)
+                    {
+                        let newRow = tBody.insertRow(-1); //Index of -1 means added at the end
 
-                    (newRow.insertCell()).innerHTML = quote['street'];
-                    (newRow.insertCell()).innerHTML = quote['city'];
-                    (newRow.insertCell()).innerHTML = quote['state'];
-                    (newRow.insertCell()).innerHTML = quote['zip'];
-                    (newRow.insertCell()).innerHTML = quote['gallons'];
-                    (newRow.insertCell()).innerHTML = (new Date(quote['deliveryDate'])).toDateString();
-                    (newRow.insertCell()).innerHTML = "$" + quote['pricePerGallon'];
-                    (newRow.insertCell()).innerHTML = "$" + quote['amount'];
+                        (newRow.insertCell()).innerHTML = quote['street'];
+                        (newRow.insertCell()).innerHTML = quote['city'];
+                        (newRow.insertCell()).innerHTML = quote['state'];
+                        (newRow.insertCell()).innerHTML = quote['zip'];
+                        (newRow.insertCell()).innerHTML = quote['gallons'];
+                        (newRow.insertCell()).innerHTML = (new Date(quote['deliveryDate'])).toDateString();
+                        (newRow.insertCell()).innerHTML = "$" + quote['pricePerGallon'];
+                        (newRow.insertCell()).innerHTML = "$" + quote['amount'];
 
+                    }
                 }
             }
         });

@@ -185,7 +185,6 @@ app.post('/purchaseConfirm', async(req, res)=>{
             let state = user.UserInfo[0].state;
             let zip = user.UserInfo[0].zip;
             user.History.push({
-
                     street: street,
                     city: city,
                     state: state,
