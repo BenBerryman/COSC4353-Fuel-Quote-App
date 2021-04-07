@@ -1,6 +1,7 @@
 
 
 async function postProfileInfo(name, street, city, state, zip) {
+    //TODO Input validation for profile info
     const userID = getUserID();
     const resp =  await fetch('http://localhost:5000/mainProfile', {
         method: 'POST',
