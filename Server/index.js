@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 //User model import
 const User = require('./models/userModel');
-
+const pricing = require('./pricingModule');
 const cors = require('cors');
 const crypto = require('crypto-js');
 
@@ -23,40 +23,6 @@ const URI = "mongodb+srv://fulr:fulr@cluster0.3vuf3.mongodb.net/myFirstDatabase?
 });
 
 // /**********DATABASE CONNECTION TEST DELETE LATER**********************/
-// /* open compass while running to see interaction */
-// user = new User({
-//
-//     email:'Mynameisbob223@gmail.com',
-//     password: 'asdasdjadasdhasjd',
-//
-//     UserInfo: [{firstname: 'Bob', lastname: 'King', street: '1234 Avenue blvd.',
-//     zip: 77407, city: 'Houston'}],
-//
-//     History:[{pricePerGallon: 1.50, gallons: 125678}]
-//
-// });
-//
-//
-// user.save().then(() => {
-//
-//     console.log('Item stored in DB, will take 10 seconds to delete....')
-//
-// });
-//
-//
-//
-// function clearTest(){
-//
-//     User.deleteOne({_id: user._id}).then(() => {
-//
-//         console.log('Removed item from DB');
-//
-//     })
-//
-// }
-//
-// //Clears Test after some time so you can see the database interaction
-// setTimeout(clearTest, 10000);
 
 // middleware
 app.use(cors());
@@ -175,15 +141,17 @@ app.post('/login', async(req, res)=>{
 app.post('/purchaseConfirm', async(req, res)=>{
     try
     {
-        const {userID, gallons, deliveryDate, amount} = req.body;
+        const {userID, gallons, deliveryDate} = req.body;
+        const prices = await pricing.getPrice(userID, gallons);
         User.findById(userID, (error, user)=>{
-            if (error) {
+            if (error)
+            {
                 res.sendStatus(500); //500=Internal error
             }
-            let street = user.UserInfo[0].street;
-            let city = user.UserInfo[0].city;
-            let state = user.UserInfo[0].state;
-            let zip = user.UserInfo[0].zip;
+            const street = user.UserInfo[0].street;
+            const city = user.UserInfo[0].city;
+            const state = user.UserInfo[0].state;
+            const zip = user.UserInfo[0].zip;
             user.History.push({
                     street: street,
                     city: city,
@@ -191,8 +159,8 @@ app.post('/purchaseConfirm', async(req, res)=>{
                     zip: zip,
                     gallons: gallons,
                     deliveryDate: deliveryDate,
-                    pricePerGallon: 6,
-                    amount: amount
+                    pricePerGallon: prices[0],
+                    amount: prices[1]
                 });
             user.save();
             res.sendStatus(200);
@@ -202,14 +170,31 @@ app.post('/purchaseConfirm', async(req, res)=>{
     }
 });
 
-app.get('/price', async(req, res)=> {
-    //TODO Implement pricing module
+app.post('/price', async(req, res)=> {
+    try {
+        const {userID, gallons} = req.body;
+        const prices = await pricing.getPrice(userID, gallons);
+        res.status(200).json({
+            pricePerGal: prices[0],
+            amtDue: prices[1]
+        });
+    } catch (err) {
+        if (err == '500')
+        {
+            res.sendStatus(500);
+        }
+        else if (err == '404')
+        {
+            res.sendStatus(404);
+        }
+        console.log(err.message);
+    }
 });
 
 app.post('/register', async(req, res)=> {
     try {
         const {email, password} = req.body;
-        const salt = Math.random().toString(36).substring(10); //Password salting to prevent pre-computation attacks
+        const salt = Math.random().toString(36).substring(3); //Password salting to prevent pre-computation attacks
         const hashedPassword = crypto.SHA3(salt + password).toString();
 
         var user = new User({

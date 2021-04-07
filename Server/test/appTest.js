@@ -1,6 +1,6 @@
 var chai = require('chai');
 const assert = require('chai').assert;
-const app = require('../app');
+const app = require('../index');
 let chaiHttp = require('chai-http');
 
 //Asserstion style

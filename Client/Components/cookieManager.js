@@ -19,15 +19,18 @@ const pageName = window.location.pathname.split("/").pop();
 if (pageName === 'homepage.html')
 {
     const userID = getUserID();
-    getUserByID(userID).then((response)=> {
-        if (response[0] == 200 || response[0] == 304)
-        {
-            let login = document.getElementById('login');
-            let register = document.getElementById('register');
-            login.outerHTML = '<a href="/Profile/mainProfile.html">PROFILE</a>'
-            register.remove();
-        }
-    });
+    if (userID != null)
+    {
+        getUserByID(userID).then((response)=> {
+            if (response[0] == 200 || response[0] == 304)
+            {
+                let login = document.getElementById('login');
+                let register = document.getElementById('register');
+                login.outerHTML = '<a href="/Profile/mainProfile.html">PROFILE</a>'
+                register.remove();
+            }
+        });
+    }
 }
 else
 {
@@ -43,6 +46,11 @@ else
         getUserByID(userID).then((response)=> {
             if (response[0] == 200 || response[0] == 304)
             {
+                if (response[1]['userInfo'][0] == undefined)
+                {
+                    window.location.href = '../Login/profileSetup.html';
+                }
+
                 let profileName = document.getElementsByClassName('profileName')[0];
                 const fullName = `${response[1]['userInfo'][0].firstName} ${response[1]['userInfo'][0].lastName}`;
                 profileName.innerHTML = fullName;
@@ -53,33 +61,34 @@ else
                 document.getElementsByClassName('state')[0].innerHTML = state;
                 document.getElementsByClassName('zip')[0].innerHTML = zip;
 
-                let quoteHistory = document.getElementById('quoteHistory');
                 let history = response[1]['history'];
-                if (history.length == 0)
+                if (pageName == 'mainProfile.html')
                 {
-                    quoteHistory.innerHTML = `
-                        <div class="noData">
-                            <span>No history found.</span>
-                            <span>Try requesting a quote!</span>
-                        </div>`;
-                }
-                else
-                {
-                    let table = quoteHistory.getElementsByTagName('table')[0];
-                    let tBody = table.getElementsByTagName('tbody')[0];
-                    for (let quote of history)
+                    if (history.length == 0)
                     {
-                        let newRow = tBody.insertRow(-1); //Index of -1 means added at the end
+                        quoteHistory.innerHTML = `
+                    <div class="noData">
+                        <span>No history found.</span>
+                        <span>Try requesting a quote!</span>
+                    </div>`;
+                    }
+                    else
+                    {
+                        let quoteHistory = document.getElementById('quoteHistory');
+                        let table = quoteHistory.getElementsByTagName('table')[0];
+                        let tBody = table.getElementsByTagName('tbody')[0];
+                        for (let quote of history) {
+                            let newRow = tBody.insertRow(-1); //Index of -1 means added at the end
 
-                        (newRow.insertCell()).innerHTML = quote['street'];
-                        (newRow.insertCell()).innerHTML = quote['city'];
-                        (newRow.insertCell()).innerHTML = quote['state'];
-                        (newRow.insertCell()).innerHTML = quote['zip'];
-                        (newRow.insertCell()).innerHTML = quote['gallons'];
-                        (newRow.insertCell()).innerHTML = (new Date(quote['deliveryDate'])).toDateString();
-                        (newRow.insertCell()).innerHTML = "$" + quote['pricePerGallon'];
-                        (newRow.insertCell()).innerHTML = "$" + quote['amount'];
-
+                            (newRow.insertCell()).innerHTML = quote['street'];
+                            (newRow.insertCell()).innerHTML = quote['city'];
+                            (newRow.insertCell()).innerHTML = quote['state'];
+                            (newRow.insertCell()).innerHTML = quote['zip'];
+                            (newRow.insertCell()).innerHTML = quote['gallons'];
+                            (newRow.insertCell()).innerHTML = (new Date(quote['deliveryDate'])).toDateString();
+                            (newRow.insertCell()).innerHTML = "$" + quote['pricePerGallon'].toFixed(2);
+                            (newRow.insertCell()).innerHTML = "$" + quote['amount'].toFixed(2);
+                        }
                     }
                 }
             }

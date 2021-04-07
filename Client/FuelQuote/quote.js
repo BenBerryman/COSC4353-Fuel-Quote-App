@@ -1,6 +1,7 @@
 
 function stepUp(inputField) {
     inputField.value++;
+    inputField.dispatchEvent(new Event('change'));
 }
 
 function stepDown(inputField) {
@@ -10,6 +11,7 @@ function stepDown(inputField) {
     else if (inputField.value == 1) {
         inputField.value = null;
     }
+    inputField.dispatchEvent(new Event('change'));
 }
 
 function checkValid(input) {
@@ -28,7 +30,7 @@ function pricing() {
     let timeout = null;
 
     // Listen for input change events
-    gallons.addEventListener('change', function (e) {
+    gallons.onchange = function (e) {
         // Clear the timeout if it has already been set.
         // This will prevent the previous task from executing
         // if it has been less than <MILLISECONDS>
@@ -36,15 +38,25 @@ function pricing() {
 
         // Make a new timeout set to go off in 1000ms (1 second)
         timeout = setTimeout(function () {
-            // document.getElementById('dueAmt').innerHTML = getPrice();
-
-        }, 1000);
-    });
+            const gallons = document.getElementById('gallons').value;
+            getPrice(gallons)
+                .then((result)=> {
+                    document.getElementById('pricePerGal').innerHTML = '<sup>$ </sup>' + result[1]['pricePerGal'].toFixed(2);
+                    document.getElementById('amtDue').innerHTML = '<sup>$ </sup>' + result[1]['amtDue'].toFixed(2);
+                });
+            }, 1000);
+    };
 }
 
-async function getPrice() {
-    let response = await fetch(`http://localhost:5000/price`);
-    return await response.json();
+async function getPrice(gallons) {
+    let response = await fetch(`http://localhost:5000/price`,
+        {method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                userID: getUserID(),
+                gallons: gallons
+            })});
+    return [response.status, await response.json()];
 }
 
 function getUserID() {
@@ -58,7 +70,7 @@ function getUserID() {
     }
 }
 
-async function confirmPurchase(gallons, deliveryDate, amount) {
+async function confirmPurchase(gallons, deliveryDate) {
     const userID = getUserID();
     let resp = await fetch("http://localhost:5000/purchaseConfirm",
         {method: "POST",
@@ -66,8 +78,7 @@ async function confirmPurchase(gallons, deliveryDate, amount) {
             body: JSON.stringify({
                 userID: userID,
                 gallons: gallons,
-                deliveryDate: deliveryDate,
-                amount: amount
+                deliveryDate: deliveryDate
             })
         });
     return resp.status;
@@ -95,10 +106,9 @@ $(document).ready(function() {
 
     document.getElementsByTagName("form")[0].onsubmit = function(event) {
         event.preventDefault();
-        let gallons = document.getElementById("gallons").value;
-        let deliveryDate = document.getElementById("date").value;
-        let amount =  document.getElementById("dueAmt").innerHTML;
-        confirmPurchase(gallons, deliveryDate, amount).then(respCode => {
+        const gallons = document.getElementById("gallons").value;
+        const deliveryDate = document.getElementById("date").value;
+        confirmPurchase(gallons, deliveryDate).then(respCode => {
             if (respCode == 200) {
                 document.location.href = "http://localhost:8000/FuelQuote/purchaseConfirm.html"
             }

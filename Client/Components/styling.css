@@ -449,7 +449,7 @@ input#date {
 }
 
 
-#pricePerGallon, #totalAmtDue {
+#pricePerGal, #amtDue {
     font-family: "Neue Montreal";
     font-size: 19pt;
 }
@@ -462,6 +462,7 @@ input#date {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 31px;
 }
 
 .pricing-field:first-of-type {
