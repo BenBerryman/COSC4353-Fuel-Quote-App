@@ -35,6 +35,8 @@ function pricing() {
         // This will prevent the previous task from executing
         // if it has been less than <MILLISECONDS>
         clearTimeout(timeout); //TODO Disable purchase button until timeout
+        let button = document.getElementById('submit');
+        button.disabled = true;
         // Make a new timeout set to go off in 1000ms (1 second)
         timeout = setTimeout(function () {
             const gallons = document.getElementById('gallons').value;
@@ -42,6 +44,7 @@ function pricing() {
                 .then((result)=> {
                     document.getElementById('pricePerGal').innerHTML = '<sup>$ </sup>' + result[1]['pricePerGal'].toFixed(2);
                     document.getElementById('amtDue').innerHTML = '<sup>$ </sup>' + result[1]['amtDue'].toFixed(2);
+                    button.disabled = false;
                 });
             }, 1000);
     };

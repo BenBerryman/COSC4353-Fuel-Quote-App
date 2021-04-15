@@ -549,3 +549,8 @@ input[type="text"], input[type="email"], input[type="password"] {
 button.secondary {
     background-color: #6a6a6a;
 }
+
+button:disabled, button:disabled:hover {
+    cursor: default;
+    background-color: #454545;
+}
