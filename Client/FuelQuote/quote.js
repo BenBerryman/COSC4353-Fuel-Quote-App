@@ -34,9 +34,11 @@ function pricing() {
         // Clear the timeout if it has already been set.
         // This will prevent the previous task from executing
         // if it has been less than <MILLISECONDS>
-        clearTimeout(timeout); //TODO Disable purchase button until timeout
+        clearTimeout(timeout);
         let button = document.getElementById('submit');
         button.disabled = true;
+        document.getElementById('pricePerGal').innerHTML = "...";
+        document.getElementById('amtDue').innerHTML = "...";
         // Make a new timeout set to go off in 1000ms (1 second)
         timeout = setTimeout(function () {
             const gallons = document.getElementById('gallons').value;

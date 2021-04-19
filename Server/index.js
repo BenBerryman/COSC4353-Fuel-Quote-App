@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 //User model import
 const User = require('./models/userModel');
 const pricing = require('./pricingModule');
+const validation = require('./inputValidationModule');
 const cors = require('cors');
 const crypto = require('crypto-js');
 
@@ -36,9 +37,21 @@ app.use(express.json());      //req.body
 app.post('/mainProfile', async(req, res)=>{
     try
     {
-        let {userID, name, street, city, state, zip} = req.body;
-        let firstName = name.split(' ')[0];
-        let lastName = name.split(' ')[1];
+        let {userID, firstName, lastName, street, city, state, zip} = req.body;
+        try {
+
+            firstName = validation.checkAlphanumeric(firstName, 'firstName');
+            lastName = validation.checkAlphanumeric(lastName, 'lastName');
+            street = validation.checkAlphanumeric(street, 'street');
+            city = validation.checkAlphanumeric(city, 'city');
+            state = validation.checkState(state, 'state');
+            zip = validation.checkNumeric(zip, 'zip');
+
+        } catch (err) {
+            res.status(403).json({'field': err.message}); //403 = Forbidden
+            return;
+        }
+
         User.findById(userID, (error, user)=> {
             user.UserInfo = {
                 firstName: firstName,
@@ -82,12 +95,28 @@ app.put('/mainProfile', async(req, res)=> {
     try {
 
         let {userID, field, data} = req.body;
+        try {
+            switch (field) {
+                case 'zip':
+                    data = validation.checkNumeric(data);
+                    break;
+                case 'state':
+                    data = validation.checkState(data);
+                    break;
+                default:
+                    data = validation.checkAlphanumeric(data);
+            }
+        } catch (err) {
+            res.sendStatus(403); //403 = Forbidden
+            return;
+        }
+
         User.findById(userID, (error, user)=>{
             if (!user) {
                 res.sendStatus(404);
+                return;
             }
             else {
-                console.log(data);
                 if (field == 'street') {
                     user.UserInfo[0].street = data;
                 } else if (field =='city') {
