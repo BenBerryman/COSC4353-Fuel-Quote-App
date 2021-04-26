@@ -9,24 +9,8 @@ const validation = require('./inputValidationModule');
 const cors = require('cors');
 const crypto = require('crypto-js');
 
-
-//Database Connection
-const URI = "mongodb+srv://fulr:fulr@cluster0.3vuf3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
- mongoose.connect(URI, {
-
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-
-}).then(() => {
-
-    console.log('Database Connection established')
-
-});
-
-// /**********DATABASE CONNECTION TEST DELETE LATER**********************/
-
 // middleware
-app.use(cors());
+app.use(cors);
 app.use(express.json());      //req.body
 
 
