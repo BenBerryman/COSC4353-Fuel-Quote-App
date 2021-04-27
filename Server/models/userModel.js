@@ -35,5 +35,5 @@ const AuthenticationSchema = new Schema({
 });
 
 const User = mongoose.model('users', AuthenticationSchema);
-module.exports  = User;
+module.exports = User;
 

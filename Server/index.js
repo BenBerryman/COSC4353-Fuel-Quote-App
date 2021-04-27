@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+const mongoose= require('mongoose');
 
-//User model import
+//User model const
 const User = require('./models/userModel');
 const pricing = require('./pricingModule');
 const validation = require('./inputValidationModule');
@@ -10,10 +10,15 @@ const cors = require('cors');
 const crypto = require('crypto-js');
 
 // middleware
-app.use(cors);
+app.use(cors());
 app.use(express.json());      //req.body
 
 
+const URI = "mongodb+srv://fulr:fulr@cluster0.3vuf3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+mongoose.connect(URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
 
 //ROUTES
 
@@ -64,7 +69,7 @@ app.get('/getUserById', async(req, res)=> {
             else
             {
                 res.status(200).json({
-                    history: user.History,
+                    history: user.History.reverse(),
                     userInfo: user.UserInfo
                 });
             }
@@ -192,15 +197,14 @@ app.post('/price', async(req, res)=> {
             amtDue: prices[1]
         });
     } catch (err) {
-        if (err == '500')
-        {
-            res.sendStatus(500);
-        }
-        else if (err == '404')
+        if (err == '404')
         {
             res.sendStatus(404);
         }
-        console.log(err.message);
+        else
+        {
+            res.sendStatus(500);
+        }
     }
 });
 
@@ -229,3 +233,5 @@ app.post('/register', async(req, res)=> {
 app.listen(5000, ()=>{
     console.log("Back-end/database server started on port 5000. Press Ctrl-C to exit.");
 });
+
+module.exports = app;

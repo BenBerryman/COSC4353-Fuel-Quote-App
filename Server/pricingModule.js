@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 //User model import
-const User = require('./models/userModel');
+const User = require('./models/userModel.js');
 
 const getPrice = async(userID, gallons)=>
 {

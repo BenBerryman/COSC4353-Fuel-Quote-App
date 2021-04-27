@@ -111,7 +111,7 @@ $(document).ready(function() {
     document.getElementsByTagName("form")[0].onsubmit = function(event) {
         event.preventDefault();
         const gallons = document.getElementById("gallons").value;
-        const deliveryDate = document.getElementById("date").value;
+        const deliveryDate = document.getElementById("alt-date").value;
         confirmPurchase(gallons, deliveryDate).then(respCode => {
             if (respCode == 200) {
                 document.location.href = "http://localhost:8000/FuelQuote/purchaseConfirm.html"
