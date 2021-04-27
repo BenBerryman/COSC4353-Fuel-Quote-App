@@ -304,11 +304,11 @@ button.page-title:hover {
     width: 150px;
 }
 
-.data-field > .text-input {
+.data-field > .text-input:not(select) {
     width: 306px;
     padding: 3px;
 }
-.data-field.edit > .text-input {
+.data-field.edit > .text-input:not(select) {
     width: 200px;
     padding: 6px;
 }
@@ -350,17 +350,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 select {
-    height: 32px;
-    width: 212px;
-    background: #423c3c;
-    color: white;
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    font-size: 12pt;
-    padding: 2px;
-    font-family: "Avenir Next LT Pro";
 
     background-image:
             linear-gradient(45deg, transparent 50%, gray 50%),
@@ -372,6 +365,17 @@ select {
             5px 5px,
             5px 5px;
     background-repeat: no-repeat;
+}
+
+select.as-content-editable {
+    height: 32px;
+    width: 212px;
+    background-color: #423c3c;
+    color: white;
+    font-size: 12pt;
+    padding: 2px;
+    font-family: "Avenir Next LT Pro";
+
 }
 
 select:focus {

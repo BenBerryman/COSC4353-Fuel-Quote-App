@@ -24,7 +24,7 @@ function getUserID() {
 }
 
 function stateSelect(currentSelection) {
-    let select = `<select class="text-input state">
+    let select = `<select class="text-input as-content-editable state">
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AR">AR</option>
