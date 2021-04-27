@@ -13,7 +13,7 @@ describe('Main Profile', () => {
                 .post('/mainProfile')
                 .send({
                     'userID' : res._id,
-                    'firstName' : 'Jane',
+                    'firstName' : 'John',
                     'lastName' : 'Doe',
                     'street' : '4385 Example Way',
                     'city' : 'Dallas',
