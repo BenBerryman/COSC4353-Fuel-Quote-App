@@ -1,32 +1,32 @@
+// Imports
 const express = require('express');
-const app = express();
 const mongoose= require('mongoose');
-
-//User model const
 const User = require('./models/userModel');
-const pricing = require('./pricingModule');
-const validation = require('./inputValidationModule');
+const pricing = require('./modules/pricingModule');
+const validation = require('./modules/inputValidationModule');
 const cors = require('cors');
 const crypto = require('crypto-js');
+const app = express();
 
-// middleware
+// Middleware
 app.use(cors());
-app.use(express.json());      //req.body
+app.use(express.json());
 
-
+// DB Connect
 const URI = "mongodb+srv://fulr:fulr@cluster0.3vuf3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 });
 
-//ROUTES
+// ROUTES
 
 //Setup user profile for first time
 app.post('/mainProfile', async(req, res)=>{
     try
     {
         let {userID, firstName, lastName, street, city, state, zip} = req.body;
+        // Input Validation
         try {
 
             firstName = validation.checkAlphanumeric(firstName, 'firstName');
@@ -37,7 +37,7 @@ app.post('/mainProfile', async(req, res)=>{
             zip = validation.checkNumeric(zip, 'zip');
 
         } catch (err) {
-            res.status(403).json({'field': err.message}); //403 = Forbidden
+            res.status(403).json({'field': err.message}); // 403 = Forbidden
             return;
         }
 
@@ -52,7 +52,7 @@ app.post('/mainProfile', async(req, res)=>{
             };
             user.save();
         });
-        res.sendStatus(200);
+        res.sendStatus(200); // 200 = OK
     } catch(err) {
         console.log(err.message);
     }
@@ -64,14 +64,14 @@ app.get('/getUserById', async(req, res)=> {
         User.findById(userID, function(error, user){
             if (!user)
             {
-                res.sendStatus(404);
+                res.sendStatus(404); // 404 = Not Found
             }
             else
             {
                 res.status(200).json({
                     history: user.History.reverse(),
                     userInfo: user.UserInfo
-                });
+                }); // 200 = OK
             }
         });
     } catch (err) {
@@ -84,6 +84,7 @@ app.put('/mainProfile', async(req, res)=> {
     try {
 
         let {userID, field, data} = req.body;
+        // Input Validation
         try {
             switch (field) {
                 case 'zip':
@@ -96,13 +97,13 @@ app.put('/mainProfile', async(req, res)=> {
                     data = validation.checkAlphanumeric(data);
             }
         } catch (err) {
-            res.sendStatus(403); //403 = Forbidden
+            res.sendStatus(403); // 403 = Forbidden
             return;
         }
 
         User.findById(userID, (error, user)=>{
             if (!user) {
-                res.sendStatus(404);
+                res.sendStatus(404); // 404 = Not Found
                 return;
             }
             else {
@@ -116,7 +117,7 @@ app.put('/mainProfile', async(req, res)=> {
                     user.UserInfo[0].zip = data;
                 }
                 user.save();
-                res.sendStatus(200);
+                res.sendStatus(200); // 200 = OK
             }
         });
     } catch(err) {
@@ -124,6 +125,29 @@ app.put('/mainProfile', async(req, res)=> {
     }
 });
 
+// User register
+app.post('/register', async(req, res)=> {
+    try {
+        const {email, password} = req.body;
+        const salt = Math.random().toString(36).substring(3); //Password salting to prevent pre-computation attacks
+        const hashedPassword = crypto.SHA3(salt + password).toString();
+
+        var user = new User({
+            email: email,
+            hashedPassword: hashedPassword,
+            salt: salt
+        });
+        user.save((error, user)=> {
+            const userID = user.id;
+            res.status(200).json({userID: userID}); // 200 = OK
+        });
+
+    } catch (err) {
+        console.log(err.message);
+    }
+});
+
+// User login
 app.post('/login', async(req, res)=>{
     try
     {
@@ -131,7 +155,7 @@ app.post('/login', async(req, res)=>{
         User.findOne({email: email}).then((user)=> {
             if (!user) //User with this email does not exist
             {
-                res.sendStatus(404); //404 = Not found
+                res.sendStatus(404); // 404 = Not found
             }
             else
             {
@@ -142,20 +166,20 @@ app.post('/login', async(req, res)=>{
                 if (hashedPassword === storedHash) //Correct Password
                 {
                     const userID = user.id;
-                    res.status(200).json({userID: userID});
+                    res.status(200).json({userID: userID}); // 200 = OK
                 }
                 else //Incorrect Password
                 {
-                    res.sendStatus(401); //401 = Unauthorized
+                    res.sendStatus(401); // 401 = Unauthorized
                 }
             }
-        })
-
+        });
     } catch(err) {
         console.log(err.message);
     }
 });
 
+// Confirm fuel purchase
 app.post('/purchaseConfirm', async(req, res)=>{
     try
     {
@@ -164,7 +188,7 @@ app.post('/purchaseConfirm', async(req, res)=>{
         User.findById(userID, (error, user)=>{
             if (error)
             {
-                res.sendStatus(500); //500=Internal error
+                res.sendStatus(500); // 500 = Internal error
             }
             const street = user.UserInfo[0].street;
             const city = user.UserInfo[0].city;
@@ -181,13 +205,14 @@ app.post('/purchaseConfirm', async(req, res)=>{
                     amount: prices[1]
                 });
             user.save();
-            res.sendStatus(200);
+            res.sendStatus(200); // 200 = OK
         });
     } catch(err) {
         console.log(err.message);
     }
 });
 
+// Retrieve prospective fuel purchase price
 app.post('/price', async(req, res)=> {
     try {
         const {userID, gallons} = req.body;
@@ -195,41 +220,20 @@ app.post('/price', async(req, res)=> {
         res.status(200).json({
             pricePerGal: prices[0],
             amtDue: prices[1]
-        });
+        }); // 200 = OK
     } catch (err) {
         if (err == '404')
         {
-            res.sendStatus(404);
+            res.sendStatus(404); // 404 = Not Found
         }
         else
         {
-            res.sendStatus(500);
+            res.sendStatus(500); // 500 = Internal error
         }
     }
 });
 
-app.post('/register', async(req, res)=> {
-    try {
-        const {email, password} = req.body;
-        const salt = Math.random().toString(36).substring(3); //Password salting to prevent pre-computation attacks
-        const hashedPassword = crypto.SHA3(salt + password).toString();
-
-        var user = new User({
-            email: email,
-            hashedPassword: hashedPassword,
-            salt: salt
-        });
-        user.save((error, user)=> {
-            const userID = user.id;
-            res.status(200).json({userID: userID});
-        });
-
-    } catch (err) {
-        console.log(err.message);
-    }
-});
-
-// set up the server listening at port 5000 (the port number can be changed)
+// Set up the server listening at port 5000 (the port number can be changed)
 app.listen(5000, ()=>{
     console.log("Back-end/database server started on port 5000. Press Ctrl-C to exit.");
 });
