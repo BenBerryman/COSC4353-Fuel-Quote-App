@@ -10,7 +10,7 @@ A web app to simulate the purchase of fuel, complete with login/registration and
 ## Getting Started
 
 ### Prerequisites
-- Node.js installed on your local machine (nodejs.org)
+- Node.js installed on your local machine (https://nodejs.org)
 - Access to a web browser (Firefox recommended)
 
 ### Installation
